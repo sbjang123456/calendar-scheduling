@@ -1,11 +1,10 @@
-
-.TextBox {
+.FormControl {
   border: 0;
   margin: 0;
   display: inline-flex;
   padding: 0;
   position: relative;
-  min-width: 0;
+  min-width: 100px;
   flex-direction: column;
   vertical-align: top;
   .label {
@@ -61,7 +60,15 @@
       background: none;
       box-sizing: content-box;
       letter-spacing: inherit;
-      animation-duration: 10ms;
+      &::selection {
+        cursor: pointer;
+        min-width: 16px;
+        user-select: none;
+        border-radius: 0;
+        option {
+          background-color: #fff;
+        }
+      }
       &:focus {
         outline: 0;
       }

@@ -9,7 +9,8 @@ import {
     DialogTitle,
     DialogContent,
     DialogAction,
-    TextBox
+    TextBox,
+    SelectBox
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
@@ -76,7 +77,15 @@ const ComponentsPage = (): React.ReactElement => {
                             />
                         </div>
                         <div className='row'>
-                            d
+                            <SelectBox
+                                label='선택상자'
+                                fullWidth
+                            >
+                                <option>tsest</option>
+                                <option>tsest</option>
+                                <option>tsest</option>
+                                <option>tsest</option>
+                            </SelectBox>
                         </div>
                     </div>
                 </div>

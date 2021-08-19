@@ -8,3 +8,4 @@ export { default as DialogContent } from './dialog/DialogContent';
 export { default as DialogAction } from './dialog/DialogAction';
 
 export { default as TextBox } from './formControl/TextBox';
+export { default as SelectBox } from './formControl/SelectBox';
