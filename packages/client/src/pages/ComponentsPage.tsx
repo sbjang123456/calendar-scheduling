@@ -3,7 +3,8 @@ import React from 'react';
 
 import {
     Button,
-    Chip
+    Chip,
+    ButtonGroup
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
@@ -21,6 +22,12 @@ const ComponentsPage = (): React.ReactElement => {
                             <Button size='small'>Small BUTTON</Button>
                             <Button color='black'>Medium BUTTON</Button>
                             <Button size='large' color='white'>Large BUTTON</Button>
+                        </div>
+                        <div className='row'>
+                            <ButtonGroup>
+                                <Button color='black'>월</Button>
+                                <Button color='white'>주</Button>
+                            </ButtonGroup>
                         </div>
                         <div className='row'>
                             <Chip label='Chip Button' />

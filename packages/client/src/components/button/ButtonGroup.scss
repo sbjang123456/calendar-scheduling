@@ -1,0 +1,31 @@
+$borderColor: #a7a3a3;
+
+.ButtonGroup {
+  display: inline-flex;
+  //border-radius: 4px;
+
+  &.rounded>.Button {
+    border-radius: 40px;
+  }
+  &.squared>.Button {
+    border-radius: 4px;
+  }
+
+  &>.Button {
+    margin-left: 0;
+    border-radius: 4px;
+  }
+  &>.Button:not(:last-child) {
+    border-right: 1px solid $borderColor;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &>.Button:not(:first-child) {
+    margin-left: -1px;
+    border-left: 1px solid $borderColor;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+
+}
