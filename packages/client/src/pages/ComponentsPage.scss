@@ -8,6 +8,15 @@
       margin: auto;
       padding: 24px;
       justify-content: center;
+      div.area {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        div.row {
+          display: inline-flex;
+          margin: 8px;
+        }
+      }
     }
   }
 }

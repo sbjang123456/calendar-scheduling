@@ -1,5 +1,6 @@
-$default: #a7a3a3;
-$primary: #000000;
+$gray: #a7a3a3;
+$black: #000000;
+$white: #ffffff;
 $hoverPercentage: 15%;
 
 .Button {
@@ -15,10 +16,10 @@ $hoverPercentage: 15%;
   border: none;
   cursor: pointer;
   align-items: center;
-  background: $default;
+  background: $gray;
 
   &:hover {
-    background: lighten($color: $default, $amount: $hoverPercentage);
+    background: lighten($color: $gray, $amount: $hoverPercentage);
     transition: 0.5s;
   }
 
@@ -46,20 +47,37 @@ $hoverPercentage: 15%;
 
   @mixin button-color($color) {
     background: $color;
-    &:hover {
-      background: lighten($color, $hoverPercentage);
+    @if $color == white {
+      color: $black;
+      background: $color;
+      border: 1px solid rgba(0,0,0,0.1);
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      &:active {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    } @else {
+      &:hover {
+        background: lighten($color, $hoverPercentage);
+      }
+      &:active {
+        background: darken($color, $hoverPercentage);
+      }
     }
-    &:active {
-      background: darken($color, $hoverPercentage);
-    }
+
   }
 
-  &.default {
-    @include button-color($default);
+  &.gray {
+    @include button-color($gray);
   }
 
-  &.primary {
-    @include button-color($primary);
+  &.black {
+    @include button-color($black);
+  }
+
+  &.white {
+    @include button-color($white);
   }
 
   & + & {

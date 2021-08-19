@@ -16,15 +16,23 @@ const ComponentsPage = (): React.ReactElement => {
             <main>
                 <h4>Buttons</h4>
                 <div className='groups'>
-                    <Button size='small'>Small BUTTON</Button>
-                    <Button size='medium' color='primary'>Medium BUTTON</Button>
+                    <div className='area'>
+                        <div className='row'>
+                            <Button size='small'>Small BUTTON</Button>
+                            <Button color='black'>Medium BUTTON</Button>
+                            <Button size='large' color='white'>Large BUTTON</Button>
+                        </div>
+                        <div className='row'>
+                            <Chip label='Chip Button' />
+                        </div>
+                    </div>
+
                 </div>
-                <hr />
-                <h4>Chip</h4>
+                {/*<hr />*/}
+                <h4></h4>
                 <div className='groups'>
-                    <Chip label='Chip Button' />
                 </div>
-                <hr />
+                {/*<hr />*/}
 
             </main>
         </div>

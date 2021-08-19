@@ -4,8 +4,8 @@ import React from 'react';
 import classNames from 'utils/classNames';
 
 interface ButtonProps extends React.PropsWithChildren<any> {
-    size?: string;
-    color?: string;
+    size?: 'small'|'medium'|'large';
+    color?: 'gray'|'black'|'white';
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -22,7 +22,7 @@ const Button = ({ children , size , color, onClick }: ButtonProps): React.ReactE
 
 Button.defaultProps = {
     size: 'medium',
-    color: 'default'
+    color: 'gray'
 };
 
 export default Button;
