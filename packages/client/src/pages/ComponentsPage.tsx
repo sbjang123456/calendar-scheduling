@@ -1,13 +1,22 @@
 import './ComponentsPage.scss';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     Button,
     Chip,
-    ButtonGroup
+    ButtonGroup,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogAction
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleClickToggle = () => {
+        setOpen(!open);
+    };
 
     return (
         <div className='components_container'>
@@ -37,13 +46,26 @@ const ComponentsPage = (): React.ReactElement => {
                             <Chip label='Chip Button' />
                         </div>
                     </div>
-
                 </div>
-                {/*<hr />*/}
                 <h4>Dialog</h4>
                 <div className='groups'>
+                    <Button onClick={handleClickToggle}>Dialog Open</Button>
+                    <Dialog
+                        open={open}
+                        onClose={handleClickToggle}
+                    >
+                        <DialogTitle onClose={handleClickToggle}>
+                            다이얼로그 제목
+                        </DialogTitle>
+                        <DialogContent>
+                            다이얼로그 창 Content
+                        </DialogContent>
+                        <DialogAction>
+                            <Button>취소</Button>
+                            <Button color='black'>확인</Button>
+                        </DialogAction>
+                    </Dialog>
                 </div>
-                {/*<hr />*/}
 
             </main>
         </div>

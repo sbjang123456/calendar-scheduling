@@ -1,0 +1,70 @@
+
+.Dialog {
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  .backdrop {
+    inset: 0;
+    display: flex;
+    z-index: -1;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .container {
+    height: 100%;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .paper {
+      max-width: 600px;
+      min-width: 300px;
+      display: flex;
+      max-height: calc(100% - 64px);
+      flex-direction: column;
+      margin: 32px;
+      position: relative;
+      overflow-y: auto;
+      border-radius: 10px;
+      color: #000;
+      background-color: #fff;
+      &.large {
+        max-width: 900px;
+        min-width: 600px;
+      }
+      .title {
+        margin: 0;
+        padding: 16px;
+        flex: 0 0 auto;
+        .label {
+          font-size: 1.25rem;
+          font-weight: 500;
+          line-height: 1.6;
+          letter-spacing: 0.0075em;
+          margin: 0;
+        }
+        button {
+          top: 8px;
+          right: 8px;
+          position: absolute;
+        }
+      }
+      .content {
+        padding: 16px;
+        flex: 1 1 auto;
+        overflow-y: auto;
+      }
+      .action {
+        margin: 0;
+        padding: 20px 10px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}

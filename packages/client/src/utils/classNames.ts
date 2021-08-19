@@ -1,4 +1,2 @@
 
-export default (...arg: any[]) => {
-    return arg.join(' ');
-}
+export default (...arg: any[]) => arg.filter((e:any) => e).join(' ');
