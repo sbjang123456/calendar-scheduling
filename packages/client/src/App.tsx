@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { ScheduleCalendarPage } from 'pages';
+import { ScheduleCalendarPage, ComponentsPage } from 'pages';
 
 function App() {
     return (
@@ -9,6 +9,7 @@ function App() {
             <Route exact path={'/'}>
                 <Redirect to={'/schedule?viewType=month'} />
             </Route>
+            <Route exact path={'/components'} component={ComponentsPage} />
         </Switch>
     );
 }
