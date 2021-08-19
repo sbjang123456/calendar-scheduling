@@ -6,16 +6,6 @@ import {
 } from "react-router-dom";
 import queryString from 'query-string';
 
-// interface routerInterface {
-//     push: any;
-//     replace: any;
-//     pathname: string;
-//     query: any;
-//     location: any;
-//     history: any;
-//     params: any;
-// }
-
 const useRouter = () => {
     const params = useParams();
     const location = useLocation();

@@ -1,7 +1,10 @@
 import './ComponentsPage.scss';
 import React from 'react';
 
-import { Button } from 'components';
+import {
+    Button,
+    Chip
+} from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
 
@@ -15,6 +18,11 @@ const ComponentsPage = (): React.ReactElement => {
                 <div className='groups'>
                     <Button size='small'>Small BUTTON</Button>
                     <Button size='medium' color='primary'>Medium BUTTON</Button>
+                </div>
+                <hr />
+                <h4>Chip</h4>
+                <div className='groups'>
+                    <Chip label='Chip Button' />
                 </div>
                 <hr />
 
