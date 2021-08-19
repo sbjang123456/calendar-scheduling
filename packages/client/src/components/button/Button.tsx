@@ -6,13 +6,14 @@ import classNames from 'utils/classNames';
 interface ButtonProps extends React.PropsWithChildren<any> {
     size?: 'small'|'medium'|'large';
     color?: 'gray'|'black'|'white';
+    shape?: 'circle'|'square'
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ children , size , color, onClick }: ButtonProps): React.ReactElement => {
+const Button = ({ children , size , color, shape, onClick }: ButtonProps): React.ReactElement => {
     return (
         <button
-            className={classNames('Button' , size , color )}
+            className={classNames('Button' , size , color, shape )}
             onClick={onClick}
         >
             {children}
@@ -22,7 +23,8 @@ const Button = ({ children , size , color, onClick }: ButtonProps): React.ReactE
 
 Button.defaultProps = {
     size: 'medium',
-    color: 'gray'
+    color: 'gray',
+    shape: 'square'
 };
 
 export default Button;

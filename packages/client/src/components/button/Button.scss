@@ -50,7 +50,7 @@ $hoverPercentage: 15%;
     @if $color == white {
       color: $black;
       background: $color;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       &:hover {
         background: rgba(0, 0, 0, 0.1);
       }
@@ -65,7 +65,6 @@ $hoverPercentage: 15%;
         background: darken($color, $hoverPercentage);
       }
     }
-
   }
 
   &.gray {
@@ -78,6 +77,11 @@ $hoverPercentage: 15%;
 
   &.white {
     @include button-color($white);
+  }
+
+  &.circle {
+    border-radius: 50%;
+    border: none;
   }
 
   & + & {

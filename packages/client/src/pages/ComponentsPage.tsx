@@ -24,6 +24,10 @@ const ComponentsPage = (): React.ReactElement => {
                             <Button size='large' color='white'>Large BUTTON</Button>
                         </div>
                         <div className='row'>
+                            <Button size='large' color='white' shape='circle'>{'<'}</Button>
+                            <Button size='large' color='white' shape='circle'>{'>'}</Button>
+                        </div>
+                        <div className='row'>
                             <ButtonGroup>
                                 <Button color='black'>월</Button>
                                 <Button color='white'>주</Button>
@@ -36,7 +40,7 @@ const ComponentsPage = (): React.ReactElement => {
 
                 </div>
                 {/*<hr />*/}
-                <h4></h4>
+                <h4>Dialog</h4>
                 <div className='groups'>
                 </div>
                 {/*<hr />*/}
