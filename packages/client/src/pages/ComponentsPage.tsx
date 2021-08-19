@@ -8,7 +8,8 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
-    DialogAction
+    DialogAction,
+    TextBox
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
@@ -65,6 +66,19 @@ const ComponentsPage = (): React.ReactElement => {
                             <Button color='black'>확인</Button>
                         </DialogAction>
                     </Dialog>
+                </div>
+                <h4>Form Controls</h4>
+                <div className='groups'>
+                    <div className='area'>
+                        <div className='row'>
+                            <TextBox
+                                label='텍스트상자'
+                            />
+                        </div>
+                        <div className='row'>
+                            d
+                        </div>
+                    </div>
                 </div>
 
             </main>
