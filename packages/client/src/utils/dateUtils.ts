@@ -31,4 +31,41 @@ export const getDateFormatting = (arrDate: string[], delimiter: string = '-') =>
     return arrDate.join(delimiter);
 };
 
+/**
+ * 월 변경 후 년월일 배열로 반환하는 함수
+ * @param arrDate
+ * @param kind
+ */
+export const changeMonthYmd = (arrDate: string[], kind: 'prev' | 'next' | 'today') => {
+    let [changeYear, changeMonth, changeDate] = arrDate;
+
+    if (kind === 'today') {
+        return getDate();
+    } else {
+        if (kind === 'prev') {
+            if (changeMonth === '01') {
+                changeMonth = (Number(changeMonth) + 11).toString();
+                changeYear = (Number(changeYear) - 1).toString()
+            } else {
+                changeMonth = lPad(Number(changeMonth) - 1);
+            }
+        } else if (kind === 'next') {
+            if (changeMonth === '12') {
+                changeMonth = lPad(Number(changeMonth) - 11);
+                changeYear = (Number(changeYear) + 1).toString()
+            } else {
+                changeMonth = lPad(Number(changeMonth) + 1);
+            }
+        }
+
+        if (changeMonth === getDate()[1]) {
+            changeDate = getDate()[2]
+        } else {
+            changeDate = '01';
+        }
+    }
+
+    return [changeYear, changeMonth, changeDate];
+};
+
 

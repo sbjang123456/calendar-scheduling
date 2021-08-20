@@ -1,6 +1,6 @@
 import './ScheduleCalendarPage.scss';
 
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Button, ButtonGroup, Calendar } from 'components';
 import { useRouter } from 'hooks';
 import { DateUtils } from 'utils';
@@ -12,20 +12,17 @@ const ScheduleCalendarPage = (): React.ReactElement => {
     const [month, setMonth] = useState<string>('');
     const [date, setDate] = useState<string>('');
 
-    // const [year, setYear]
+    const handleClickCalendarChange = (kind: 'prev'|'next'|'today') => () => {
+        const [cYear, cMonth, cDate] = DateUtils.changeMonthYmd([year, month, date], kind);
+        setYmd([cYear, cMonth, cDate]);
+        push(`/schedule/calendar/${viewType}/${cYear}/${cMonth}/${cDate}`);
+    }
 
-    const handleClickViewType = (vt: string) => (evt: any) => {
-        // const target = evt.target;
-        // const beforeElement = target.parentElement.querySelector('button.black');
-        // beforeElement.classList.remove('black');
-        // beforeElement.classList.add('white');
-        // target.classList.remove('white');
-        // target.classList.add('black');
-
+    const handleClickViewType = (vt: string) => () => {
         push(`/schedule/calendar/${vt}/${year}/${month}/${date}`);
     };
 
-    const setYmd = useCallback((y: string, m: string, d: string) => {
+    const setYmd = useCallback(([y, m, d]: string[]) => {
         setYear(y);
         setMonth(m);
         setDate(d);
@@ -34,10 +31,10 @@ const ScheduleCalendarPage = (): React.ReactElement => {
     useEffect(() => {
         if (!sYear || !sMonth || !sDate) {
             const [tYear, tMonth, tDate] = DateUtils.getDate();
-            setYmd(tYear, tMonth, tDate);
+            setYmd([tYear, tMonth, tDate]);
             push(`/schedule/calendar/${viewType}/${tYear}/${tMonth}/${tDate}`);
         } else {
-            setYmd(sYear, sMonth, sDate);
+            setYmd([sYear, sMonth, sDate]);
         }
 
     }, [sYear, sMonth, sDate]);
@@ -46,11 +43,11 @@ const ScheduleCalendarPage = (): React.ReactElement => {
         <div className='container'>
             <header>
                 <div className='toolbar'>
-                    <Button color='white' shape='round'>오늘</Button>
+                    <Button color='white' shape='round' onClick={handleClickCalendarChange('today')}>오늘</Button>
                     <div className='title'>
-                        <Button color='white' shape='circle'>{'<'}</Button>
+                        <Button color='white' shape='circle' onClick={handleClickCalendarChange('prev')}>{'<'}</Button>
                         <h2>{year}년 {month}월</h2>
-                        <Button color='white' shape='circle'>{'>'}</Button>
+                        <Button color='white' shape='circle' onClick={handleClickCalendarChange('next')}>{'>'}</Button>
                     </div>
                     <ButtonGroup>
                         <Button color={viewType === 'month' ? 'black' : 'white'}
