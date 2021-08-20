@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+    font-weight: 600;
+    width: 100%;
+    height: 80px;
+
+    .toolbar {
+      width: 100%;
+      display: flex;
+      //padding: 5px 20px;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+  }
+
+  main {
+
+  }
+}
