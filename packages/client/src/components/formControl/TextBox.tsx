@@ -16,7 +16,7 @@ const TextBox = ({ type, value, label, fullWidth, onChange }: TextBoxProps): Rea
 
     const handleFade = (type: string) => () => {
         setFadeType(type);
-    }
+    };
 
     return (
         <div className={classNames('FormControl', fullWidth && 'fullWidth')}>
@@ -25,7 +25,7 @@ const TextBox = ({ type, value, label, fullWidth, onChange }: TextBoxProps): Rea
                 <input
                     type={type}
                     value={value}
-                    className="control"
+                    className='control'
                     onChange={onChange}
                     onFocus={handleFade('focus')}
                     onBlur={handleFade('blur')}
@@ -33,10 +33,10 @@ const TextBox = ({ type, value, label, fullWidth, onChange }: TextBoxProps): Rea
             </div>
         </div>
     );
-}
+};
 
 TextBox.defaultProps = {
     type: 'text'
-}
+};
 
 export default TextBox;

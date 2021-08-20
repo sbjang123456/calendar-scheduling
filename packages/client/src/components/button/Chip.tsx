@@ -10,12 +10,12 @@ interface ChipProps {
 const Chip = ({ label, onClick }: ChipProps): React.ReactElement => {
     return (
         <button
-            className="Chip"
+            className='Chip'
             onClick={onClick}
         >
             {label}
         </button>
     );
-}
+};
 
 export default Chip;

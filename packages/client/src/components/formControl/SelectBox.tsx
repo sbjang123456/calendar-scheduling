@@ -14,7 +14,7 @@ const SelectBox = ({ children, value, label, onChange }: SelectBoxProps): React.
 
     const handleFade = (type: string) => () => {
         setFadeType(type);
-    }
+    };
 
     return (
         <div className={'FormControl'}>
@@ -22,7 +22,7 @@ const SelectBox = ({ children, value, label, onChange }: SelectBoxProps): React.
             <div className={classNames('input', fadeType)}>
                 <select
                     value={value}
-                    className="control"
+                    className='control'
                     onChange={onChange}
                     onFocus={handleFade('focus')}
                     onBlur={handleFade('blur')}
@@ -32,6 +32,6 @@ const SelectBox = ({ children, value, label, onChange }: SelectBoxProps): React.
             </div>
         </div>
     );
-}
+};
 
 export default SelectBox;

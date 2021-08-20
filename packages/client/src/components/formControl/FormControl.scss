@@ -7,6 +7,7 @@
   min-width: 0;
   flex-direction: column;
   vertical-align: top;
+
   .label {
     top: 0;
     left: 0;
@@ -19,10 +20,12 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1;
+
     &.focus {
       color: rgba(0, 0, 0, 0.85);
     }
   }
+
   .input {
     margin-top: 16px;
     color: rgba(0, 0, 0, 0.85);
@@ -35,9 +38,11 @@
     font-weight: 400;
     line-height: 1.1876em;
     letter-spacing: 0.00938em;
+
     &.focus:before, &:hover:before {
       border-bottom: 2px solid rgba(0, 0, 0, 0.85);
     }
+
     &:before {
       left: 0;
       right: 0;
@@ -47,6 +52,7 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.55);
       pointer-events: none;
     }
+
     .control {
       font: inherit;
       color: currentColor;
@@ -60,17 +66,20 @@
       background: none;
       box-sizing: content-box;
       letter-spacing: inherit;
+
       &::selection {
         cursor: pointer;
         min-width: 16px;
         user-select: none;
         border-radius: 0;
       }
+
       &:focus {
         outline: 0;
       }
     }
   }
+
   &.fullWidth {
     width: 100%
   }

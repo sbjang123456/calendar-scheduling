@@ -39,6 +39,6 @@ const Dialog = ({ open, ...others }: DialogProps): React.ReactElement => {
 
 Dialog.defaultProps = {
     size: 'medium'
-}
+};
 
 export default Dialog;

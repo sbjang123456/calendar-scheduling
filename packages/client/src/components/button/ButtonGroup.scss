@@ -4,23 +4,26 @@ $borderColor: #a7a3a3;
   display: inline-flex;
   //border-radius: 4px;
 
-  &.rounded>.Button {
+  &.rounded > .Button {
     border-radius: 40px;
   }
-  &.squared>.Button {
+
+  &.squared > .Button {
     border-radius: 4px;
   }
 
-  &>.Button {
+  & > .Button {
     margin-left: 0;
     border-radius: 4px;
   }
-  &>.Button:not(:last-child) {
+
+  & > .Button:not(:last-child) {
     border-right: 1px solid $borderColor;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  &>.Button:not(:first-child) {
+
+  & > .Button:not(:first-child) {
     margin-left: -1px;
     border-left: 1px solid $borderColor;
     border-top-left-radius: 0;

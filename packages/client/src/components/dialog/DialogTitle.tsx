@@ -7,11 +7,11 @@ interface DialogControlProps extends React.PropsWithChildren<any> {
 
 const DialogTitle = ({ children, onClose }: DialogControlProps): React.ReactElement => {
     return (
-        <div className="title">
-            <h6 className="label">{children}</h6>
-            {onClose && <Button onClick={onClose} color='white' shape='circle'>X</Button> }
+        <div className='title'>
+            <h6 className='label'>{children}</h6>
+            {onClose && <Button onClick={onClose} color='white' shape='circle'>X</Button>}
         </div>
     );
-}
+};
 
 export default DialogTitle;

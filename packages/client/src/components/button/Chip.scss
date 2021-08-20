@@ -11,16 +11,18 @@
   padding: 0 12px;
   font-size: 0.8125rem;
   box-sizing: border-box;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   align-items: center;
   white-space: nowrap;
   border-radius: 16px;
   vertical-align: middle;
   justify-content: center;
   text-decoration: none;
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
   &:active {
     background: rgba(0, 0, 0, 0.05);
   }
