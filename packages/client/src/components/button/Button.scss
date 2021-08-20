@@ -87,6 +87,10 @@ $hoverPercentage: 15%;
     border: none;
   }
 
+  &.round {
+    border-radius: 20px;
+  }
+
   & + & {
     margin-left: 1rem;
   }

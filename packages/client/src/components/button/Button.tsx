@@ -6,7 +6,7 @@ import classNames from 'utils/classNames';
 interface ButtonProps extends React.PropsWithChildren<any> {
     size?: 'small'|'medium'|'large';
     color?: 'gray'|'black'|'white';
-    shape?: 'circle'|'square'
+    shape?: 'circle'|'square'|'round'
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
