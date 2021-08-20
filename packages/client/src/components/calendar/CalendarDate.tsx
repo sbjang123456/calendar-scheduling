@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { getDateFormatting } from 'utils/dateUtils';
+import React, { useMemo } from 'react';
+import { lPad, getDateFormatting, changeMonthYmd } from 'utils/dateUtils';
 import { classNames } from 'utils';
 
 export interface CalendarDateProps {
@@ -7,7 +7,7 @@ export interface CalendarDateProps {
     sYear: string;
     sMonth: string;
     sDate: string;
-    onDateClick?: (event: any) => void;
+    onDateClick?: any;
     onScheduleClick?: (event: any) => void;
 }
 
@@ -19,6 +19,14 @@ const CalendarDate = ({
                           onDateClick,
                           onScheduleClick
                       }: CalendarDateProps): React.ReactElement => {
+
+    const handleClickDate = (sDate: string[], type: string) => () => {
+        const formattingDate = getDateFormatting(
+            type === 'ne' ? changeMonthYmd(sDate, 'next') :
+                type === 'be' ? changeMonthYmd(sDate, 'prev') : sDate
+        );
+        onDateClick(formattingDate);
+    };
 
     const calendarDays = useMemo(() => {
         const year = Number(sYear);
@@ -55,9 +63,9 @@ const CalendarDate = ({
             {calendarDays.map((week: any, idxWeek) => (
                 <div key={idxWeek} role='row' className='Date'>
                     {week.map((day: any, idx: number) => {
-                        const dateKey = getDateFormatting([sYear, sMonth, day.date]);
+                        const dateKey = getDateFormatting([sYear, sMonth, lPad(day.date)]);
                         return (
-                            <div key={dateKey}>
+                            <div key={dateKey} onClick={handleClickDate([sYear, sMonth, lPad(day.date)], day.type)}>
                                 <span className={classNames('dateLabel', day.type !== 'cu' && 'notCurrentMonth')}>
                                     <span className={classNames(dateKey === getDateFormatting(today) && 'today')}>
                                         {day.date}
