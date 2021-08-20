@@ -79,12 +79,11 @@ const ComponentsPage = (): React.ReactElement => {
                         <div className='row'>
                             <SelectBox
                                 label='선택상자'
-                                fullWidth
                             >
-                                <option>tsest</option>
-                                <option>tsest</option>
-                                <option>tsest</option>
-                                <option>tsest</option>
+                                <option>테스트입니다1</option>
+                                <option>테스트입니다2</option>
+                                <option>테스트입니다3</option>
+                                <option>테스트입니다4</option>
                             </SelectBox>
                         </div>
                     </div>

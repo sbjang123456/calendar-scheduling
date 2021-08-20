@@ -4,7 +4,7 @@
   display: inline-flex;
   padding: 0;
   position: relative;
-  min-width: 100px;
+  min-width: 0;
   flex-direction: column;
   vertical-align: top;
   .label {
@@ -65,9 +65,6 @@
         min-width: 16px;
         user-select: none;
         border-radius: 0;
-        option {
-          background-color: #fff;
-        }
       }
       &:focus {
         outline: 0;
