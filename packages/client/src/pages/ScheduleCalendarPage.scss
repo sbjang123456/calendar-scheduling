@@ -24,11 +24,14 @@
       .title {
         display: inline-flex;
         align-items: center;
+        h2, h3, h4, h5, h6 {
+          padding: 0 10px;
+        }
       }
     }
   }
 
   main {
-
+    width: 100%;
   }
 }

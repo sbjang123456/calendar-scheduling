@@ -1,0 +1,90 @@
+$borderStyle: 1px solid rgba(0, 0, 0, 0.2);
+
+.Calendar {
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-top: 30px;
+
+  div[role='row'] {
+    width: 100%;
+    border-bottom: $borderStyle;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .Day {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 14%;
+      min-height: 40px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 500;
+      box-sizing: border-box;
+      border-right: $borderStyle;
+
+      &:first-child {
+        color: rgba(255, 0, 0, 0.7);
+      }
+
+      &:last-child {
+        color: rgba(0, 0, 255, 0.7);
+        border-right: none;
+      }
+    }
+  }
+
+  .Date {
+    display: flex;
+    justify-content: space-between;
+
+    & div {
+      width: 14%;
+      min-height: 110px;
+      font-weight: 600;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    & > div {
+      border-right: $borderStyle;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+    .dateLabel {
+      margin: 8px 0;
+      font-size: 0.85rem;
+      color: rgba(0, 0, 0, 0.6);
+      display: inline-flex;
+
+      &.notCurrentMonth {
+        color: rgba(0, 0, 0, 0.2);
+      }
+
+      & > span {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        padding: 2px;
+
+        &.today {
+          background-color: rgba(0, 0, 255, 0.8);
+          border-radius: 50%;
+          color: white;
+        }
+      }
+    }
+  }
+}

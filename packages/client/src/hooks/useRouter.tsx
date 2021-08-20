@@ -11,7 +11,7 @@ const useRouter = () => {
     const location = useLocation();
     const history = useHistory();
 
-    return useMemo(() => {
+    return useMemo((): any => {
         return {
             push: history.push,
             replace: history.replace,
