@@ -1,8 +1,8 @@
 import { atom, selector } from 'recoil';
 
-export const scheduleDialogOpenState = atom<boolean>({
+export const scheduleDialogOpenState = atom<string>({
     key: 'scheduleDialogOpenState',
-    default: false
+    default: ''
 });
 
 export const arrDateState = atom<string[]>({

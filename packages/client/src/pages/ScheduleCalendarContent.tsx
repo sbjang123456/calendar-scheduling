@@ -11,7 +11,7 @@ const ScheduleCalendarPage = (): React.ReactElement => {
     const setScheduleDialogOpen = useSetRecoilState(scheduleDialogOpenState);
 
     const handleClickDate = (strDate: string) => {
-        setScheduleDialogOpen(true);
+        setScheduleDialogOpen(strDate);
     };
 
     return (

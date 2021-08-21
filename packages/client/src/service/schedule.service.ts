@@ -2,8 +2,10 @@ import axios from 'axios';
 
 export interface scheduleDataInterface {
     title: string;
-    startAt: string;
-    endAt: string;
+    startAtDate?: string;
+    startAtTime?: string;
+    endAtDate?: string;
+    endAtTime?: string;
 }
 
 export const findScheduleAll = async () => {

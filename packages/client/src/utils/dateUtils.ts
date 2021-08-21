@@ -24,11 +24,33 @@ export const lPad = (val: number | string, fillStr: string = '0', fillCnt: numbe
  */
 export const getDate = (strDate?: string): string[] => {
     const date = strDate ? new Date(strDate) : new Date();
-    let year = date.getFullYear().toString();
-    let month = lPad(date.getMonth() + 1);
-    let day = lPad(date.getDate());
+    const year = date.getFullYear().toString();
+    const month = lPad(date.getMonth() + 1);
+    const day = lPad(date.getDate());
+
     return [year, month, day];
 };
+
+/**
+ * 현재 시간 기준 30분 전 앞 시간 리턴
+ */
+export const getTodayHmSettings = () => {
+    const date = new Date();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+
+    if (minutes < 30) {
+        return [
+            `${lPad(hours)}:00`,
+            `${lPad(hours)}:30`,
+        ]
+    } else {
+        return [
+            `${lPad(hours)}:30`,
+            `${lPad(hours + 1)}:00`,
+        ]
+    }
+}
 
 /**
  * 배열형태(년,월,일)의 날짜를 포맷팅
@@ -77,6 +99,17 @@ export const changeMonthYmd = (arrDate: string[], kind: 'prev' | 'next' | 'today
     }
 
     return [changeYear, changeMonth, changeDate];
+};
+
+/**
+ * 시작 종료 날짜 검증
+ * @param startAt
+ * @param endAt
+ */
+export const dateValidate = (startAt: string, endAt: string) => {
+    const stDate = new Date(startAt);
+    const edDate = new Date(endAt);
+    return stDate < edDate && stDate !== edDate;
 };
 
 
