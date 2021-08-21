@@ -10,7 +10,8 @@ import {
     DialogContent,
     DialogAction,
     TextBox,
-    SelectBox
+    SelectBox,
+    TimeSelectBox
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
@@ -85,6 +86,11 @@ const ComponentsPage = (): React.ReactElement => {
                                 <option>테스트입니다3</option>
                                 <option>테스트입니다4</option>
                             </SelectBox>
+                        </div>
+                        <div className='row'>
+                            <TimeSelectBox
+                                label='시간 선택'
+                            />
                         </div>
                     </div>
                 </div>

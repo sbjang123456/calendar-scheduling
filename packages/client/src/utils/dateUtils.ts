@@ -1,13 +1,21 @@
 /**
- * 날짜 두자리 수로 채우는 left pad 함수
+ * 왼쪽으로 자리수를 채우는 left pad 함수
  * @param val
+ * @param fillStr
+ * @param fillCnt
  */
-export const lPad = (val: number) => {
-    if (val >= 10) {
-        return val.toString();
+export const lPad = (val: number | string, fillStr: string = '0', fillCnt: number = 1) => {
+    if (typeof val === 'number') {
+        if (val >= Math.pow(10, fillCnt)) {
+            return val.toString();
+        }
+    } else {
+        if (val.length >= fillCnt) {
+            return val;
+        }
     }
 
-    return `0${val}`;
+    return `${Array(fillCnt + 1).join(fillStr)}${val}`;
 };
 
 /**
