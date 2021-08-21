@@ -8,10 +8,12 @@ interface TextBoxProps {
     value?: string;
     label?: string;
     fullWidth?: boolean;
+    required?: boolean;
+    error?: boolean;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextBox = ({ type, value, label, fullWidth, onChange }: TextBoxProps): React.ReactElement => {
+const TextBox = ({ type, value, label, fullWidth, required, error, onChange }: TextBoxProps): React.ReactElement => {
     const [fadeType, setFadeType] = useState<string>('blur');
 
     const handleFade = (type: string) => () => {
@@ -19,8 +21,14 @@ const TextBox = ({ type, value, label, fullWidth, onChange }: TextBoxProps): Rea
     };
 
     return (
-        <div className={classNames('FormControl', fullWidth && 'fullWidth')}>
-            <label className={classNames('label', fadeType)}>{label}</label>
+        <div
+            className={classNames(
+                'FormControl',
+                fullWidth && 'fullWidth',
+                error && 'error'
+            )}
+        >
+            <label className={classNames('label', fadeType)}>{required && '*'} {label}</label>
             <div className={classNames('input', fadeType)}>
                 <input
                     type={type}

@@ -78,10 +78,26 @@ const ComponentsPage = (): React.ReactElement => {
                                 label='텍스트상자'
                                 fullWidth
                             />
+                            <TextBox
+                                label='텍스트상자'
+                                fullWidth
+                                required
+                                error
+                            />
                         </div>
                         <div className='row'>
                             <SelectBox
                                 label='선택상자'
+                            >
+                                <option>테스트입니다1</option>
+                                <option>테스트입니다2</option>
+                                <option>테스트입니다3</option>
+                                <option>테스트입니다4</option>
+                            </SelectBox>
+                            <SelectBox
+                                label='선택상자'
+                                required
+                                error
                             >
                                 <option>테스트입니다1</option>
                                 <option>테스트입니다2</option>

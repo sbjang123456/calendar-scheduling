@@ -1,17 +1,9 @@
 import React, { useMemo } from 'react';
 import SelectBox from './SelectBox';
 import { lPad } from 'utils/dateUtils';
+import { SelectBoxProps } from './SelectBox';
 
-interface TimeSelectBoxProps {
-    value?: string;
-    label?: string;
-    width?: number;
-    fullWidth?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
-
-const TimeSelectBox = ({ value, label, width, fullWidth, onChange }: TimeSelectBoxProps): React.ReactElement => {
-
+const TimeSelectBox = (props: SelectBoxProps): React.ReactElement => {
     const arrTime = useMemo<{ value: string, text: string }[]>(() => {
         let times = [];
         for (let i = 0; i < 48; i++) {
@@ -30,11 +22,7 @@ const TimeSelectBox = ({ value, label, width, fullWidth, onChange }: TimeSelectB
 
     return (
         <SelectBox
-            label={label}
-            value={value}
-            width={width}
-            fullWidth={fullWidth}
-            onChange={onChange}
+            {...props}
         >
             {arrTime.map((time, idx) => (
                 <option key={idx} value={time.value}>{time.text}</option>

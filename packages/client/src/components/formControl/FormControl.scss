@@ -8,6 +8,14 @@
   flex-direction: column;
   vertical-align: top;
 
+  &.error .label {
+    color: rgba(255, 0, 0, 1);
+  }
+
+  &.error .input:before {
+    border-bottom: 1px solid rgba(255, 0, 0, 1);
+  }
+
   .label {
     top: 0;
     left: 0;

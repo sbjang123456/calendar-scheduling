@@ -29,7 +29,7 @@ const ScheduleRegisterDialog = (): React.ReactElement => {
                 <Grid container>
                     <Grid item size={12}>
                         <TextBox
-                            label='일정 제목을 입력하세요'
+                            label='* 일정 제목을 입력하세요'
                             fullWidth
                         />
                     </Grid>
