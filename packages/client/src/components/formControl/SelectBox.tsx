@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import classNames from 'utils/classNames';
 
 export interface SelectBoxProps extends React.PropsWithChildren<any> {
+    name?: string;
     value?: string;
     label?: string;
     width?: number;
@@ -15,6 +16,7 @@ export interface SelectBoxProps extends React.PropsWithChildren<any> {
 
 const SelectBox = ({
                        children,
+                       name,
                        value,
                        label,
                        width,
@@ -41,6 +43,7 @@ const SelectBox = ({
             <label className={classNames('label', fadeType)}>{required && '*'} {label}</label>
             <div className={classNames('input', fadeType)}>
                 <select
+                    name={name}
                     value={value}
                     className='control'
                     onChange={onChange}

@@ -5,6 +5,7 @@ import classNames from 'utils/classNames';
 
 interface TextBoxProps {
     type: string;
+    name?: string;
     value?: string;
     label?: string;
     fullWidth?: boolean;
@@ -13,7 +14,16 @@ interface TextBoxProps {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TextBox = ({ type, value, label, fullWidth, required, error, onChange }: TextBoxProps): React.ReactElement => {
+const TextBox = ({
+                     type,
+                     name,
+                     value,
+                     label,
+                     fullWidth,
+                     required,
+                     error,
+                     onChange
+                 }: TextBoxProps): React.ReactElement => {
     const [fadeType, setFadeType] = useState<string>('blur');
 
     const handleFade = (type: string) => () => {
@@ -32,6 +42,7 @@ const TextBox = ({ type, value, label, fullWidth, required, error, onChange }: T
             <div className={classNames('input', fadeType)}>
                 <input
                     type={type}
+                    name={name}
                     value={value}
                     className='control'
                     onChange={onChange}
