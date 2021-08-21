@@ -6,7 +6,15 @@ import CalendarDate, { CalendarDateProps } from './CalendarDate';
 interface CalendarProps extends CalendarDateProps {
 }
 
-const Calendar = ({ today, sYear, sMonth, sDate, onDateClick, onScheduleClick }: CalendarProps): React.ReactElement => {
+const Calendar = ({
+                      today,
+                      sYear,
+                      sMonth,
+                      sDate,
+                      schedules,
+                      onDateClick,
+                      onScheduleClick
+                  }: CalendarProps): React.ReactElement => {
     return (
         <div role='grid' className='Calendar'>
             <CalendarDay />
@@ -15,6 +23,7 @@ const Calendar = ({ today, sYear, sMonth, sDate, onDateClick, onScheduleClick }:
                 sYear={sYear}
                 sMonth={sMonth}
                 sDate={sDate}
+                schedules={schedules}
                 onDateClick={onDateClick}
                 onScheduleClick={onScheduleClick}
             />

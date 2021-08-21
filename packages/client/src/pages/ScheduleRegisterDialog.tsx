@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { scheduleDialogOpenState } from 'states/calendar';
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from 'recoil';
+import { scheduleDialogOpenState, scheduleListSelector } from 'states/calendar';
 import { confirmDialogState } from 'states/common';
 import {
     Dialog,
@@ -18,6 +18,7 @@ import { getTodayHmSettings, dateValidate } from 'utils/dateUtils';
 const ScheduleRegisterDialog = (): React.ReactElement => {
     const [scheduleDialogOpen, setScheduleDialogOpen] = useRecoilState(scheduleDialogOpenState);
     const setConfirmDialog = useSetRecoilState(confirmDialogState);
+    const reset = useResetRecoilState(scheduleListSelector);
 
     const [formData, setFormData] = useState<scheduleDataInterface>({
         title: ''
@@ -48,6 +49,7 @@ const ScheduleRegisterDialog = (): React.ReactElement => {
         } else {
             try {
                 await createSchedule(formData);
+                reset();
                 handleDialogClose();
             } catch (e) {
                 setConfirmDialog({

@@ -7,6 +7,7 @@ export interface CalendarDateProps {
     sYear: string;
     sMonth: string;
     sDate: string;
+    schedules: any[];
     onDateClick?: any;
     onScheduleClick?: (event: any) => void;
 }
@@ -16,6 +17,7 @@ const CalendarDate = ({
                           sYear,
                           sMonth,
                           sDate,
+                          schedules,
                           onDateClick,
                           onScheduleClick
                       }: CalendarDateProps): React.ReactElement => {
@@ -71,22 +73,23 @@ const CalendarDate = ({
                                         {day.date}
                                     </span>
                                 </span>
-                                {/*{schedules*/}
-                                {/*    .filter((schedule) => schedule.date.substr(0, 10) === dateKey)*/}
-                                {/*    .sort()*/}
-                                {/*    .map((schedule) => {*/}
-                                {/*        return (*/}
-                                {/*            <div*/}
-                                {/*                style={scheduleStyle}*/}
-                                {/*                className={schedule.completed}*/}
-                                {/*                key={schedule.desc}*/}
-                                {/*                onClick={openModal}*/}
-                                {/*            >*/}
-                                {/*                {schedule.desc}*/}
-                                {/*                <Modal isOpen={isModalOpen} close={closeModal} />*/}
-                                {/*            </div>*/}
-                                {/*        );*/}
-                                {/*    })}*/}
+                                {schedules
+                                    .filter((schedule) => (
+                                        schedule.startAt.substr(0, 10) === dateKey ||
+                                        schedule.endAt.substr(0, 10) === dateKey
+                                    ))
+                                    .sort()
+                                    .map((schedule) => {
+                                        return (
+                                            <div
+                                                className='calendar-schedule'
+                                                key={schedule.id}
+                                                // onClick={openModal}
+                                            >
+                                                {schedule.title}
+                                            </div>
+                                        );
+                                    })}
                             </div>
                         );
                     })}

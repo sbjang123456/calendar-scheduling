@@ -53,6 +53,27 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
+
+      & .calendar-schedule {
+        width: 100%;
+        min-height: 10px;
+        border-radius: 4px;
+        background-color: #112667;
+        overFlow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fff;
+        padding: 1px 1px 1px 5px;
+        margin: 0;
+        font-size: 0.7rem;
+        cursor: pointer;
+        //& + & {
+        //  margin-top: 2px;
+        //}
+        &:not(:first-child) {
+          margin-top: 2px;
+        }
+      }
     }
 
     & > div {
@@ -64,7 +85,7 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
     }
 
     .dateLabel {
-      margin: 8px 0;
+      margin: 8px 0 1px;
       font-size: 0.85rem;
       color: rgba(0, 0, 0, 0.6);
       display: inline-flex;
