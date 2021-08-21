@@ -6,7 +6,7 @@ import { classNames } from 'utils';
 interface GridProps extends React.PropsWithChildren<any> {
     container?: boolean;
     item?: boolean;
-    size?: number;
+    size?: 2 | 3 | 4 | 6 | 12;
     style?: any;
 }
 
