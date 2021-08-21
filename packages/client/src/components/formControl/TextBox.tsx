@@ -43,7 +43,7 @@ const TextBox = ({
                 <input
                     type={type}
                     name={name}
-                    value={value}
+                    value={value ?? ''}
                     className='control'
                     onChange={onChange}
                     onFocus={handleFade('focus')}

@@ -8,8 +8,8 @@ export interface CalendarDateProps {
     sMonth: string;
     sDate: string;
     schedules: any[];
-    onDateClick?: any;
-    onScheduleClick?: (event: any) => void;
+    onDateClick?: (dateFormatting:string) => void;
+    onScheduleClick?: (id: number) => void;
 }
 
 const CalendarDate = ({
@@ -23,8 +23,13 @@ const CalendarDate = ({
                       }: CalendarDateProps): React.ReactElement => {
 
     const handleClickDate = (dateFormatting: string) => () => {
-        onDateClick(dateFormatting);
+        onDateClick && onDateClick(dateFormatting);
     };
+
+    const handleClickSchedule = (id: number) => (evt: React.MouseEvent<HTMLDivElement>) => {
+        evt.stopPropagation();
+        onScheduleClick && onScheduleClick(id)
+    }
 
     const getDateFormattingByType = useCallback((arrDate: string[], type: string) => {
         return getDateFormatting(
@@ -76,7 +81,7 @@ const CalendarDate = ({
                                         {day.date}
                                     </span>
                                 </span>
-                                {schedules
+                                {(schedules ?? [])
                                     .filter((schedule) => (
                                         schedule.startAt.substr(0, 10) <= dateKey &&
                                         schedule.endAt.substr(0, 10) >= dateKey
@@ -87,7 +92,7 @@ const CalendarDate = ({
                                             <div
                                                 className='calendar-schedule'
                                                 key={schedule.id}
-                                                // onClick={openModal}
+                                                onClick={handleClickSchedule(schedule.id)}
                                             >
                                                 {schedule.title}
                                             </div>

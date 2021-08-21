@@ -22,7 +22,7 @@ export const scheduleListSelector = selector({
         get(forceReloadScheduleList);
         return findScheduleAll();
     },
-    set: ({ set }, newValue = 0) => {
+    set: ({ set }) => {
         set(forceReloadScheduleList, Math.random());
     }
 });
@@ -30,4 +30,11 @@ export const scheduleListSelector = selector({
 export const selectedScheduleState = atom<number>({
     key: 'selectedScheduleState',
     default: 0
+});
+
+export const scheduleDetailSelector = selector({
+    key: 'scheduleDetailSelector',
+    get: async ({ get }) => {
+        return findScheduleById(get(selectedScheduleState));
+    }
 });

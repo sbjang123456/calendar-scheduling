@@ -1,7 +1,7 @@
 import './ScheduleCalendarPage.scss';
 
 import React, { useEffect } from 'react';
-import { useSetRecoilState, useRecoilState, useResetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { arrDateState } from 'states/calendar';
 import { confirmDialogState } from 'states/common';
 import { useRouter } from 'hooks';
@@ -11,13 +11,13 @@ import ScheduleRegisterDialog from './ScheduleRegisterDialog';
 import ScheduleCalendarHeader from './ScheduleCalendarHeader';
 import ScheduleCalendarContent from './ScheduleCalendarContent';
 
-import { Dialog, DialogTitle, DialogAction, Button } from 'components';
+import { Dialog, DialogTitle, DialogContent, DialogAction, Button } from 'components';
 
 const ScheduleCalendarPage = (): React.ReactElement => {
     const { query: { viewType, sYear, sMonth, sDate }, push } = useRouter();
 
     const setArrDate = useSetRecoilState(arrDateState);
-    const [confirmDialog] = useRecoilState(confirmDialogState);
+    const confirmDialog = useRecoilValue(confirmDialogState);
     const setConfirmDialog = useResetRecoilState(confirmDialogState);
 
     const confirmDialogOpenToggle = () => {
@@ -42,15 +42,33 @@ const ScheduleCalendarPage = (): React.ReactElement => {
 
             <Dialog
                 open={confirmDialog?.open}
-                // onClose={confirmDialogOpenToggle}
             >
-                <DialogTitle>{confirmDialog?.title}</DialogTitle>
+                <DialogTitle onClose={confirmDialogOpenToggle}>{confirmDialog?.title}</DialogTitle>
+                {confirmDialog?.content && <DialogContent>{confirmDialog?.content}</DialogContent>}
                 <DialogAction>
-                    <Button
-                        onClick={confirmDialogOpenToggle}
-                    >
-                        확인
-                    </Button>
+                    {confirmDialog?.type
+                        ? (
+                            <>
+                                <Button
+                                    onClick={confirmDialogOpenToggle}
+                                >
+                                    취소
+                                </Button>
+                                <Button
+                                    color='black'
+                                    onClick={confirmDialog?.action}
+                                >
+                                    {confirmDialog?.type}
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                onClick={confirmDialogOpenToggle}
+                            >
+                                확인
+                            </Button>
+                        )
+                    }
                 </DialogAction>
             </Dialog>
         </div>

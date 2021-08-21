@@ -2,7 +2,8 @@ import React from 'react';
 import { useSetRecoilState, useRecoilValueLoadable } from 'recoil';
 import {
     scheduleDialogOpenState,
-    scheduleListSelector
+    scheduleListSelector,
+    selectedScheduleState
 } from 'states/calendar';
 import { Calendar } from 'components';
 import { useRouter, useLoadableContent } from 'hooks';
@@ -12,11 +13,16 @@ const ScheduleCalendarPage = (): React.ReactElement => {
     const { query: { sYear, sMonth, sDate } } = useRouter();
 
     const setScheduleDialogOpen = useSetRecoilState(scheduleDialogOpenState);
+    const setSelectedSchedule = useSetRecoilState(selectedScheduleState);
     const scheduleList = useRecoilValueLoadable(scheduleListSelector);
     const schedules = useLoadableContent(scheduleList);
 
     const handleClickDate = (strDate: string) => {
         setScheduleDialogOpen(strDate);
+    };
+
+    const handleClickSchedule = (id: number) => {
+        setSelectedSchedule(id);
     };
 
     return (
@@ -28,8 +34,7 @@ const ScheduleCalendarPage = (): React.ReactElement => {
                 sDate={sDate}
                 schedules={schedules}
                 onDateClick={handleClickDate}
-                onScheduleClick={() => () => {
-                }}
+                onScheduleClick={handleClickSchedule}
             />
         </main>
     );

@@ -27,8 +27,10 @@ export const getDate = (strDate?: string): string[] => {
     const year = date.getFullYear().toString();
     const month = lPad(date.getMonth() + 1);
     const day = lPad(date.getDate());
+    const hours = lPad(date.getHours());
+    const minutes = lPad(date.getMinutes());
 
-    return [year, month, day];
+    return [year, month, day, hours, minutes];
 };
 
 /**
@@ -42,15 +44,15 @@ export const getTodayHmSettings = () => {
     if (minutes < 30) {
         return [
             `${lPad(hours)}:00`,
-            `${lPad(hours)}:30`,
-        ]
+            `${lPad(hours)}:30`
+        ];
     } else {
         return [
             `${lPad(hours)}:30`,
-            `${lPad(hours + 1)}:00`,
-        ]
+            `${lPad(hours + 1)}:00`
+        ];
     }
-}
+};
 
 /**
  * 배열형태(년,월,일)의 날짜를 포맷팅
@@ -58,7 +60,9 @@ export const getTodayHmSettings = () => {
  * @param delimiter
  */
 export const getDateFormatting = (arrDate: string[], delimiter: string = '-') => {
-    return arrDate.join(delimiter);
+    return arrDate
+        .filter((e, i) => i < 3)
+        .join(delimiter);
 };
 
 /**
