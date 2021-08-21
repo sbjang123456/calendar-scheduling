@@ -108,7 +108,7 @@ module.exports = {
                     transaction: t
                 })
             );
-            res.status(200).send(destroy);
+            res.sendStatus(200).send(destroy);
         } catch (e) {
             logger.error(e.message);
             res.status(500).send('server error');
