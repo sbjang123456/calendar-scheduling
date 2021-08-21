@@ -11,7 +11,8 @@ import {
     DialogAction,
     TextBox,
     SelectBox,
-    TimeSelectBox
+    TimeSelectBox,
+    Grid
 } from 'components';
 
 const ComponentsPage = (): React.ReactElement => {
@@ -93,6 +94,17 @@ const ComponentsPage = (): React.ReactElement => {
                             />
                         </div>
                     </div>
+                </div>
+                <h4>Grid</h4>
+                <div className='groups'>
+                    <Grid container>
+                        <Grid item size={6} style={{ border: '1px solid #000' }}>
+                            t
+                        </Grid>
+                        <Grid item size={6} style={{ border: '1px solid #000' }}>
+                            t
+                        </Grid>
+                    </Grid>
                 </div>
 
             </main>

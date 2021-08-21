@@ -11,4 +11,6 @@ export { default as TextBox } from './formControl/TextBox';
 export { default as SelectBox } from './formControl/SelectBox';
 export { default as TimeSelectBox } from './formControl/TimeSelectBox';
 
+export { default as Grid } from './grid/Grid';
+
 export { default as Calendar } from './calendar/Calendar';
