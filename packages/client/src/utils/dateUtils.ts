@@ -116,4 +116,18 @@ export const dateValidate = (startAt: string, endAt: string) => {
     return stDate < edDate && stDate !== edDate;
 };
 
+/**
+ * 기간 내 날짜 포함여부
+ * @param target
+ * @param start
+ * @param end
+ */
+export const isContainsDate = (target: string, start: string, end: string) => {
+    const targetDate = new Date(target);
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+
+    return startDate <= targetDate && targetDate < endDate;
+};
+
 

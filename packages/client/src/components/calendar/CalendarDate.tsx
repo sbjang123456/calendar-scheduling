@@ -1,6 +1,15 @@
 import React, { useMemo, useCallback } from 'react';
-import { lPad, getDateFormatting, changeMonthYmd } from 'utils/dateUtils';
+import { lPad, getDateFormatting, changeMonthYmd, isContainsDate } from 'utils/dateUtils';
 import { classNames } from 'utils';
+
+const getRandomRgb = (): string => {
+    const getRandomNumber = (min: number, max: number) => {
+        return ~~(Math.random() * (max - min + 1)) + min;
+    };
+
+    // 밝은 흰색 계통 색상 제외
+    return `rgb(${getRandomNumber(0, 200)},${getRandomNumber(0, 200)},${getRandomNumber(0, 200)})`;
+};
 
 export interface CalendarDateProps {
     today: string[];
@@ -8,7 +17,7 @@ export interface CalendarDateProps {
     sMonth: string;
     sDate: string;
     schedules: any[];
-    onDateClick?: (dateFormatting:string) => void;
+    onDateClick?: (dateFormatting: string) => void;
     onScheduleClick?: (id: number) => void;
 }
 
@@ -28,8 +37,8 @@ const CalendarDate = ({
 
     const handleClickSchedule = (id: number) => (evt: React.MouseEvent<HTMLDivElement>) => {
         evt.stopPropagation();
-        onScheduleClick && onScheduleClick(id)
-    }
+        onScheduleClick && onScheduleClick(id);
+    };
 
     const getDateFormattingByType = useCallback((arrDate: string[], type: string) => {
         return getDateFormatting(
@@ -70,9 +79,9 @@ const CalendarDate = ({
     }, [sYear, sMonth, sDate]);
     return (
         <>
-            {calendarDays.map((week: any, idxWeek) => (
+            {calendarDays.map((week: any[], idxWeek) => (
                 <div key={idxWeek} role='row' className='Date'>
-                    {week.map((day: any) => {
+                    {week.map((day: any, idx) => {
                         const dateKey = getDateFormattingByType([sYear, sMonth, lPad(day.date)], day.type);
                         return (
                             <div key={dateKey} onClick={handleClickDate(dateKey)}>
@@ -83,8 +92,7 @@ const CalendarDate = ({
                                 </span>
                                 {(schedules ?? [])
                                     .filter((schedule) => (
-                                        schedule.startAt.substr(0, 10) <= dateKey &&
-                                        schedule.endAt.substr(0, 10) >= dateKey
+                                        isContainsDate(`${dateKey} 00:00`, schedule.startAt, schedule.endAt)
                                     ))
                                     .sort()
                                     .map((schedule) => {
@@ -93,6 +101,9 @@ const CalendarDate = ({
                                                 className='calendar-schedule'
                                                 key={schedule.id}
                                                 onClick={handleClickSchedule(schedule.id)}
+                                                style={{
+                                                    backgroundColor: getRandomRgb()
+                                                }}
                                             >
                                                 {schedule.title}
                                             </div>
