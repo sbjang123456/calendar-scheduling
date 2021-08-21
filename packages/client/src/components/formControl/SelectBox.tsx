@@ -7,10 +7,11 @@ interface SelectBoxProps extends React.PropsWithChildren<any> {
     value?: string;
     label?: string;
     width?: number;
+    fullWidth?: boolean;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectBox = ({ children, value, label, width, onChange }: SelectBoxProps): React.ReactElement => {
+const SelectBox = ({ children, value, label, width, fullWidth, onChange }: SelectBoxProps): React.ReactElement => {
     const [fadeType, setFadeType] = useState<string>('blur');
 
     const handleFade = (type: string) => () => {
@@ -18,7 +19,7 @@ const SelectBox = ({ children, value, label, width, onChange }: SelectBoxProps):
     };
 
     return (
-        <div className={'FormControl'} style={{ width: width }}>
+        <div className={classNames('FormControl', fullWidth && 'fullWidth')} style={{ width: width }}>
             <label className={classNames('label', fadeType)}>{label}</label>
             <div className={classNames('input', fadeType)}>
                 <select

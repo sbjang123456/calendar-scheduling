@@ -76,6 +76,7 @@ const ComponentsPage = (): React.ReactElement => {
                         <div className='row'>
                             <TextBox
                                 label='텍스트상자'
+                                fullWidth
                             />
                         </div>
                         <div className='row'>

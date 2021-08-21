@@ -1,16 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import SelectBox from './SelectBox';
-import classNames from 'utils/classNames';
 import { lPad } from 'utils/dateUtils';
 
 interface TimeSelectBoxProps {
     value?: string;
     label?: string;
     width?: number;
+    fullWidth?: boolean;
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const TimeSelectBox = ({ value, label, width, onChange }: TimeSelectBoxProps): React.ReactElement => {
+const TimeSelectBox = ({ value, label, width, fullWidth, onChange }: TimeSelectBoxProps): React.ReactElement => {
 
     const arrTime = useMemo<{ value: string, text: string }[]>(() => {
         let times = [];
@@ -33,6 +33,7 @@ const TimeSelectBox = ({ value, label, width, onChange }: TimeSelectBoxProps): R
             label={label}
             value={value}
             width={width}
+            fullWidth={fullWidth}
             onChange={onChange}
         >
             {arrTime.map((time, idx) => (
@@ -40,10 +41,6 @@ const TimeSelectBox = ({ value, label, width, onChange }: TimeSelectBoxProps): R
             ))}
         </SelectBox>
     );
-};
-
-TimeSelectBox.defaultProps = {
-    width: 100
 };
 
 export default TimeSelectBox;

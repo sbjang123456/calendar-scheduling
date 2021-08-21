@@ -11,10 +11,6 @@ interface GridProps extends React.PropsWithChildren<any> {
 }
 
 const Grid = ({ children, container, item, size, style }: GridProps): React.ReactElement => {
-    const handleClickStop = (evt: React.MouseEvent<HTMLDivElement>) => {
-        evt.stopPropagation();
-    };
-
     return (
         <div
             role='grid'

@@ -4,7 +4,7 @@ import React from 'react';
 import { classNames } from 'utils';
 
 interface DialogControlProps extends React.PropsWithChildren<any> {
-    size?: 'medium'|'large';
+    size?: 'small' | 'medium' | 'large';
     onClose?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -38,7 +38,7 @@ const Dialog = ({ open, ...others }: DialogProps): React.ReactElement => {
 };
 
 Dialog.defaultProps = {
-    size: 'medium'
+    size: 'small'
 };
 
 export default Dialog;
