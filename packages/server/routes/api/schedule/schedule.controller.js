@@ -1,7 +1,7 @@
 'use strict';
 
 const logger = require('../../../config/winston')('schedule.controller.js');
-const {db: {schedule}, sequelize} = require('../../../sequelize');
+const { db: { schedule }, sequelize } = require('../../../sequelize');
 
 module.exports = {
 
@@ -33,9 +33,9 @@ module.exports = {
      */
     async getSchedule(req, res) {
         try {
-            const {id} = req.params;
+            const { id } = req.params;
             const result = await schedule.findOne({
-                where: {id}
+                where: { id }
             });
             res.status(200).send(result);
         } catch (e) {
@@ -52,11 +52,13 @@ module.exports = {
      */
     async createSchedule(req, res) {
         try {
-            const {title, startAt, endAt} = req.body;
+            const { title, startAtDate, startAtTime, endAtDate, endAtTime } = req.body;
             const create = await sequelize.transaction(t =>
                 schedule.create({
-                    title, startAt, endAt
-                }, {transaction: t})
+                    title,
+                    startAt: `${startAtDate} ${startAtTime}`,
+                    endAt: `${endAtDate} ${endAtTime}`,
+                }, { transaction: t })
             );
             res.status(200).send(create);
         } catch (e) {
@@ -73,12 +75,14 @@ module.exports = {
      */
     async updateSchedule(req, res) {
         try {
-            const {body: {title, startAt, endAt}, params: {id}} = req;
+            const { body: { title, startAtDate, startAtTime, endAtDate, endAtTime }, params: { id } } = req;
             const update = await sequelize.transaction(t =>
                 schedule.update({
-                    title, startAt, endAt
+                    title,
+                    startAt: `${startAtDate} ${startAtTime}`,
+                    endAt: `${endAtDate} ${endAtTime}`,
                 }, {
-                    where: {id},
+                    where: { id },
                     transaction: t
                 })
             );
@@ -97,10 +101,10 @@ module.exports = {
      */
     async destroySchedule(req, res) {
         try {
-            const {id} = req.params;
+            const { id } = req.params;
             const destroy = await sequelize.transaction(t =>
                 schedule.destroy({
-                    where: {id},
+                    where: { id },
                     transaction: t
                 })
             );
@@ -110,4 +114,4 @@ module.exports = {
             res.status(500).send('server error');
         }
     }
-}
+};
