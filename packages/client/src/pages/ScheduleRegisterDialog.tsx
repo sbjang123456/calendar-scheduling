@@ -30,6 +30,7 @@ const ScheduleRegisterDialog = (): React.ReactElement => {
     const [scheduleDialogOpen, setScheduleDialogOpen] = useRecoilState(scheduleDialogOpenState);
     const setConfirmDialog = useSetRecoilState(confirmDialogState);
     const reset = useResetRecoilState(scheduleListSelector);
+    const resetDetail = useResetRecoilState(scheduleDetailSelector);
     const resetConfirmDialog = useResetRecoilState(confirmDialogState);
     const [selectedSchedule, setSelectedSchedule] = useRecoilState(selectedScheduleState);
     const scheduleDetail = useRecoilValueLoadable(scheduleDetailSelector);
@@ -66,7 +67,12 @@ const ScheduleRegisterDialog = (): React.ReactElement => {
             });
         } else {
             try {
-                await ScheduleService.createSchedule(formData);
+                if (scheduleDialogOpen) {
+                    await ScheduleService.createSchedule(formData);
+                } else {
+                    await ScheduleService.updateSchedule(selectedSchedule, formData);
+                    resetDetail();
+                }
                 reset();
                 handleDialogClose();
             } catch (e) {

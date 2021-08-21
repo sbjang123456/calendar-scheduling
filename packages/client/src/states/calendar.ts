@@ -32,9 +32,18 @@ export const selectedScheduleState = atom<number>({
     default: 0
 });
 
+const forceReloadScheduleDetail = atom<number>({
+    key: 'forceReloadScheduleDetail',
+    default: 0
+});
+
 export const scheduleDetailSelector = selector({
     key: 'scheduleDetailSelector',
     get: async ({ get }) => {
+        get(forceReloadScheduleDetail);
         return findScheduleById(get(selectedScheduleState));
+    },
+    set: ({ set }, newValue) => {
+        set(forceReloadScheduleDetail, Math.random());
     }
 });
