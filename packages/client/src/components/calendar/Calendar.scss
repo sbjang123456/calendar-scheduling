@@ -17,7 +17,7 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
   .Day {
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     & > div {
       display: flex;
@@ -44,7 +44,7 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
 
   .Date {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 
     & div {
       width: 14%;
