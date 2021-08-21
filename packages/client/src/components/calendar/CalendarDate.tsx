@@ -8,7 +8,7 @@ const getRandomRgb = (): string => {
     };
 
     // 밝은 흰색 계통 색상 제외
-    return `rgb(${getRandomNumber(0, 200)},${getRandomNumber(0, 200)},${getRandomNumber(0, 200)})`;
+    return `rgb(${getRandomNumber(0, 230)},${getRandomNumber(0, 230)},${getRandomNumber(0, 230)})`;
 };
 
 export interface CalendarDateProps {
