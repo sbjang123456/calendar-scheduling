@@ -1,6 +1,7 @@
 # 리액트 캘린더 일정 관리 프로젝트
+![img.png](main.png)
 
-### 개발환경
+## 개발환경
 * Windows 10
 * [Nodejs 16.6.2](https://nodejs.org/ko/)
 * [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/)
@@ -8,7 +9,7 @@
   - docker-compose v1.29.2
 * Webstorm
 
-### 기술스택
+## 기술스택
 * DB
   - Postgresql (by Docker)
     > 일정 저장을 위한 DBMS 구성. 로컬에서 쉽고 빠르게 구성할 수 있는 Docker 사용
@@ -32,13 +33,13 @@
   > 
   > 백엔드와 프론트엔드의 의존성을 프로젝트 Root 에서 한번에 설치
 
-### 필수설치 소프트웨어
+## 필수설치 소프트웨어
 * Git
 * Nodejs
 * Docker
 * Docker Compose
 
-### 패키지구조 
+## 패키지구조 
 ```
 ├── packages                        # 전체 패키지 폴더
 │   ├── client                      # 프론트엔드 패키지
@@ -65,7 +66,7 @@
 └── README.md                       # md
 ```
 
-### 설치
+## 설치
 ```shell
 git clone https://github.com/sbjang123456/calendar-scheduling.git
 cd calendar-scheduling
@@ -74,8 +75,7 @@ npm install -g yarn
 yarn
 ```
 
-### 구동
+## 구동
 ```
 yarn dev
 ```
-
