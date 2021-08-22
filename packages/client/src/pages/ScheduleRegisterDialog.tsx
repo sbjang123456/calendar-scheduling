@@ -110,14 +110,26 @@ const ScheduleRegisterDialog = (): React.ReactElement => {
 
     useEffect(() => {
         if (scheduleDialogOpen) {
-            const [startAtTime, endAtTime] = DateUtils.getTodayHmSettings();
-            setFormData(prev => ({
-                ...prev,
-                startAtDate: scheduleDialogOpen,
-                endAtDate: scheduleDialogOpen,
-                startAtTime,
-                endAtTime
-            }));
+            if (scheduleDialogOpen.length > 10) {
+                const [date, time] = scheduleDialogOpen.split(' ');
+                setFormData(prev => ({
+                    ...prev,
+                    startAtDate: date,
+                    endAtDate: date,
+                    startAtTime: time,
+                    endAtTime: time,
+                }));
+            } else {
+                const [startAtTime, endAtTime] = DateUtils.getTodayHmSettings();
+                setFormData(prev => ({
+                    ...prev,
+                    startAtDate: scheduleDialogOpen,
+                    endAtDate: scheduleDialogOpen,
+                    startAtTime,
+                    endAtTime
+                }));
+            }
+
         } else if (selectedSchedule && schedule) {
             const arrStartDate = DateUtils.getDate(schedule.startAt);
             const arrEndDate = DateUtils.getDate(schedule.endAt);
