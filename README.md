@@ -19,7 +19,7 @@
     > DBMS 종속성이 적은 ORM 사용
 * Frontend
   - [CRA (Create React App)](https://github.com/facebook/create-react-app)
-    > 리액트 템플릿 초기 셋팅 (npx create-react-app calendar-sheduling --template typescript)
+    > 리액트 템플릿 초기 셋팅 (npx create-react-app calendar-scheduling --template typescript)
   - React
     > 컴포넌트 단위 개발로 인한 재사용성이 뛰어남
   - typescript
@@ -38,6 +38,33 @@
 * Docker
 * Docker Compose
 
+### 패키지구조 
+```
+├── packages                        # 전체 패키지 폴더
+│   ├── client                      # 프론트엔드 패키지
+│   │   ├── public                  # public 
+│   │   ├── src                     # 
+│   │   │   ├── components          # UI 컴포넌트
+│   │   │   │   ├── button          ## 버튼
+│   │   │   │   ├── calendar        ## 달력
+│   │   │   │   ├── dialog          ## 다이얼로그 
+│   │   │   │   ├── formControl     ## input select 박스
+│   │   │   │   └── grid            ## 그리드(list)
+│   │   │   ├── hooks               # 커스텀 훅
+│   │   │   ├── pages               # 페이지 컨테이너
+│   │   │   ├── service             # 백엔드 요청
+│   │   │   ├── states              # recoil 상태관리 객체
+│   │   │   └── utils               # 자주 사용하는 유틸 함수
+│   ├── server                      # 백엔드 패키지
+│   │   ├── config                  # 설정 파일 (db connection 정보 및 winston 설정)
+│   │   ├── routes                  # 라우트
+│   │   │   ├── api                 #
+│   │   │   └──   └─ schedule       ## 일정관리 api 컨트롤러
+│   │   └── sequelize               # 시퀄라이즈 설정 및 model 정의
+├── docker-compose.yml              # postgresql docker compose
+└── README.md                       # md
+```
+
 ### 설치
 ```shell
 git clone https://github.com/sbjang123456/calendar-scheduling.git
@@ -52,4 +79,3 @@ yarn
 yarn dev
 ```
 
-### 기능설명
