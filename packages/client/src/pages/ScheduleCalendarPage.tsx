@@ -14,8 +14,9 @@ import ScheduleCalendarContent from './ScheduleCalendarContent';
 import { Dialog, DialogTitle, DialogContent, DialogAction, Button } from 'components';
 
 const ScheduleCalendarPage = (): React.ReactElement => {
-    const { query: { viewType, sYear, sMonth, sDate }, push } = useRouter();
+    const { query: { sViewType, sYear, sMonth, sDate }, push } = useRouter();
 
+    // const setViewType = useSetRecoilState(viewTypeState);
     const setArrDate = useSetRecoilState(arrDateState);
     const confirmDialog = useRecoilValue(confirmDialogState);
     const setConfirmDialog = useResetRecoilState(confirmDialogState);
@@ -25,14 +26,15 @@ const ScheduleCalendarPage = (): React.ReactElement => {
     };
 
     useEffect(() => {
-        if (!sYear || !sMonth || !sDate) {
+        if (!sViewType || !sYear || !sMonth || !sDate) {
             const arrCurrentDate = DateUtils.getDate();
             setArrDate(arrCurrentDate);
-            push(`/schedule/calendar/${viewType}/${arrCurrentDate[0]}/${arrCurrentDate[1]}/${arrCurrentDate[2]}`);
+            push(`/schedule/calendar/${sViewType}/${arrCurrentDate[0]}/${arrCurrentDate[1]}/${arrCurrentDate[2]}`);
         } else {
+            // setViewType(sViewType);
             setArrDate([sYear, sMonth, sDate]);
         }
-    }, [sYear, sMonth, sDate]);
+    }, [sViewType, sYear, sMonth, sDate]);
 
     return (
         <div className='container'>

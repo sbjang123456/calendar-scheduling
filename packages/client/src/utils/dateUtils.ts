@@ -22,8 +22,8 @@ export const lPad = (val: number | string, fillStr: string = '0', fillCnt: numbe
  * 날짜를 배열 형태의 년,월,일 순으로 가져오는 함수
  * @param strDate
  */
-export const getDate = (strDate?: string): string[] => {
-    const date = strDate ? new Date(strDate) : new Date();
+export const getDate = (strDate?: string | Date): string[] => {
+    const date = strDate ? (typeof strDate === 'string' ? new Date(strDate) : strDate) : new Date();
     const year = date.getFullYear().toString();
     const month = lPad(date.getMonth() + 1);
     const day = lPad(date.getDate());
@@ -69,9 +69,9 @@ export const getDateFormatting = (arrDate: string[], delimiter: string = '-') =>
  * 월 변경 후 년월일 배열로 반환하는 함수
  * @param arrDate
  * @param kind
- * @param fixDate
+ * @param isFixDate
  */
-export const changeMonthYmd = (arrDate: string[], kind: 'prev' | 'next' | 'today', fixDate?: string) => {
+export const changeMonthYmd = (arrDate: string[], kind: 'prev' | 'next' | 'today', isFixDate?: boolean) => {
     let [changeYear, changeMonth, changeDate] = arrDate;
 
     if (kind === 'today') {
@@ -93,7 +93,7 @@ export const changeMonthYmd = (arrDate: string[], kind: 'prev' | 'next' | 'today
             }
         }
 
-        if (fixDate) {
+        if (isFixDate) {
             if (changeMonth === getDate()[1]) {
                 changeDate = getDate()[2];
             } else {
@@ -128,6 +128,30 @@ export const isContainsDate = (target: string, start: string, end: string) => {
     const endDate = new Date(end);
 
     return startDate <= targetDate && targetDate < endDate;
+};
+
+/**
+ * 해당 일짜의 월요일의 날짜를 Date객체로 리턴
+ * @param arrDate
+ */
+export const getMondayDate = (arrDate: string[]) => {
+    const date = new Date(getDateFormatting(arrDate));
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day == 0 ? -6 : 1);
+    return new Date(date.setDate(diff)).toISOString().substring(0, 10);
+};
+
+export const getDateFromDiff = (targetDate: any, diff: number) => {
+    const date = new Date(targetDate);
+    return new Date(date.setDate(date.getDate() + diff)).toISOString().substring(0, 10);
+};
+
+export const getMondayToSundayLabel = (arrDate: string[]) => {
+    const mondayDate = getMondayDate(arrDate);
+    const sundayDate = getDateFromDiff(mondayDate, 6);
+    const [bYear, bMonth, bDate] = getDate(mondayDate);
+    const [aYear, aMonth, aDate] = getDate(sundayDate);
+    return `${bYear}년 ${bMonth}월 ${bDate}일 ~ ${aYear}년 ${aMonth}월 ${aDate}일`;
 };
 
 
