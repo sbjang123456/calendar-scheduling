@@ -148,9 +148,6 @@ export const isContainsDate = (target: string, start: string, end: string, isTim
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    if (startDate.getDate() === targetStDate.getDate()) {
-        console.log('test')
-    }
     return !isTimeExist ? ((targetStDate <= startDate && startDate < targetEdDate) ||
         (targetStDate <= endDate && endDate < targetEdDate)) :
         targetStDate.getTime() === startDate.getTime()

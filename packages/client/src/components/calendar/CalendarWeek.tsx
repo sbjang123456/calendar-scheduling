@@ -50,7 +50,7 @@ const CalendarWeek = ({
 
         return calendarDays;
     }, [sYear, sMonth, sDate]);
-    console.log(calendarDays);
+
     return (
         <>
             <div role='row' className='Day Day-Week-Root'>
@@ -71,9 +71,7 @@ const CalendarWeek = ({
             {calendarDays.map((weekDays: any[], idxWeek) => (
                 <div key={idxWeek} role='row' className='Date Date-Week-Root'>
                     {weekDays.map((day: any, idx) => {
-                        // const dateKey = getDateFormattingByType([sYear, sMonth, lPad(day.date)], day.type);
                         const dateKey = `${day.date} ${day.value}`;
-                        console.log(dateKey);
                         return (
                             <div key={idx} className='Date-Week' onClick={handleClickDate(dateKey)}>
                                 {idx === 0 ? (
