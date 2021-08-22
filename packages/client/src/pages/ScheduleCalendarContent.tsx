@@ -10,7 +10,7 @@ import { useRouter, useLoadableContent } from 'hooks';
 import { DateUtils } from 'utils';
 
 const ScheduleCalendarPage = (): React.ReactElement => {
-    const { query: { sYear, sMonth, sDate } } = useRouter();
+    const { query: { sViewType, sYear, sMonth, sDate } } = useRouter();
 
     const setScheduleDialogOpen = useSetRecoilState(scheduleDialogOpenState);
     const setSelectedSchedule = useSetRecoilState(selectedScheduleState);
@@ -32,6 +32,7 @@ const ScheduleCalendarPage = (): React.ReactElement => {
                 sYear={sYear}
                 sMonth={sMonth}
                 sDate={sDate}
+                sViewType={sViewType}
                 schedules={schedules}
                 onDateClick={handleClickDate}
                 onScheduleClick={handleClickSchedule}

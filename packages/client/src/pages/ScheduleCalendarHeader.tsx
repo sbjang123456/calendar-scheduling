@@ -29,7 +29,7 @@ const ScheduleCalendarHeader = (): React.ReactElement => {
     const title = useMemo(() => {
         return sViewType === 'month' ?
             `${sYear}년 ${sMonth}월` :
-            DateUtils.getMondayToSundayLabel([sYear, sMonth, sDate]);
+            DateUtils.getSundayToMondayLabel([sYear, sMonth, sDate]);
     }, [sViewType, sYear, sMonth, sDate]);
 
     return (

@@ -19,6 +19,10 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
 
+    &.Day-Week-Root {
+      justify-content: space-between;
+    }
+
     & > div {
       display: flex;
       justify-content: center;
@@ -31,13 +35,29 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       border-right: $borderStyle;
 
-      &:first-child {
+      &:first-child, &.Day-Week:nth-child(2) {
         color: rgba(255, 0, 0, 0.7);
       }
 
       &:last-child {
         color: rgba(0, 0, 255, 0.7);
         border-right: none;
+      }
+
+      &.Day-Week {
+        min-width: 12%;
+        flex-direction: column;
+
+        .Day-Week-Date {
+          font-size: 0.85rem;
+          width: 20px;
+          height: 20px;
+          text-align: center;
+          padding: 1px;
+          background-color: rgba(0, 0, 255, 0.8);
+          border-radius: 50%;
+          color: white;
+        }
       }
     }
   }
@@ -46,6 +66,14 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
 
+    &.Date-Week-Root {
+      justify-content: space-between;
+
+      &:nth-child(even) {
+        border-bottom: none;
+      }
+    }
+
     & div {
       width: 14%;
       min-height: 110px;
@@ -53,6 +81,11 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
+
+      &.Date-Week {
+        width: 12%;
+        min-height: 60px;
+      }
 
       & .calendar-schedule {
         width: 100%;
@@ -90,6 +123,7 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       font-size: 0.85rem;
       color: rgba(0, 0, 0, 0.6);
       display: inline-flex;
+      white-space: nowrap;
 
       &.notCurrentMonth {
         color: rgba(0, 0, 0, 0.2);

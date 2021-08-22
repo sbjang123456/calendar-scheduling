@@ -1,25 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
-import { lPad, getDateFormatting, changeMonthYmd, isContainsDate } from 'utils/dateUtils';
-import { classNames } from 'utils';
-
-const getRandomRgb = (): string => {
-    const getRandomNumber = (min: number, max: number) => {
-        return ~~(Math.random() * (max - min + 1)) + min;
-    };
-
-    // 밝은 흰색 계통 색상 제외
-    return `rgb(${getRandomNumber(0, 230)},${getRandomNumber(0, 230)},${getRandomNumber(0, 230)})`;
-};
-
-export interface CalendarDateProps {
-    today: string[];
-    sYear: string;
-    sMonth: string;
-    sDate: string;
-    schedules: any[];
-    onDateClick?: (dateFormatting: string) => void;
-    onScheduleClick?: (id: number) => void;
-}
+import { CalendarProps } from './Calendar';
+import { classNames, ColorUtils, DateUtils } from 'utils';
 
 const CalendarDate = ({
                           today,
@@ -29,7 +10,7 @@ const CalendarDate = ({
                           schedules,
                           onDateClick,
                           onScheduleClick
-                      }: CalendarDateProps): React.ReactElement => {
+                      }: CalendarProps): React.ReactElement => {
 
     const handleClickDate = (dateFormatting: string) => () => {
         onDateClick && onDateClick(dateFormatting);
@@ -41,9 +22,9 @@ const CalendarDate = ({
     };
 
     const getDateFormattingByType = useCallback((arrDate: string[], type: string) => {
-        return getDateFormatting(
-            type === 'ne' ? changeMonthYmd(arrDate, 'next') :
-                type === 'be' ? changeMonthYmd(arrDate, 'prev') : arrDate
+        return DateUtils.getDateFormatting(
+            type === 'ne' ? DateUtils.changeMonthYmd(arrDate, 'next') :
+                type === 'be' ? DateUtils.changeMonthYmd(arrDate, 'prev') : arrDate
         );
     }, []);
 
@@ -83,17 +64,18 @@ const CalendarDate = ({
             {calendarDays.map((week: any[], idxWeek) => (
                 <div key={idxWeek} role='row' className='Date'>
                     {week.map((day: any, idx) => {
-                        const dateKey = getDateFormattingByType([sYear, sMonth, lPad(day.date)], day.type);
+                        const dateKey = getDateFormattingByType([sYear, sMonth, DateUtils.lPad(day.date)], day.type);
                         return (
                             <div key={dateKey} onClick={handleClickDate(dateKey)}>
                                 <span className={classNames('dateLabel', day.type !== 'cu' && 'notCurrentMonth')}>
-                                    <span className={classNames(dateKey === getDateFormatting(today) && 'today')}>
+                                    <span
+                                        className={classNames(dateKey === DateUtils.getDateFormatting(today) && 'today')}>
                                         {day.date}
                                     </span>
                                 </span>
                                 {(schedules ?? [])
                                     .filter((schedule) => (
-                                        isContainsDate(dateKey, schedule.startAt, schedule.endAt)
+                                        DateUtils.isContainsDate(dateKey, schedule.startAt, schedule.endAt)
                                     ))
                                     .sort()
                                     .map((schedule) => {
@@ -103,7 +85,7 @@ const CalendarDate = ({
                                                 key={schedule.id}
                                                 onClick={handleClickSchedule(schedule.id)}
                                                 style={{
-                                                    backgroundColor: getRandomRgb()
+                                                    backgroundColor: ColorUtils.getRandomRgb()
                                                 }}
                                             >
                                                 {schedule.title}

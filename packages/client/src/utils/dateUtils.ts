@@ -19,6 +19,25 @@ export const lPad = (val: number | string, fillStr: string = '0', fillCnt: numbe
 };
 
 /**
+ * 하루 24시간 30분 단위로 가져오는 함수
+ */
+export const getDayHours = () => {
+    let times = [];
+    for (let i = 0; i < 48; i++) {
+        const hour = Math.floor(i / 2);
+        const min = i % 2 !== 0 ? ':30' : ':00';
+        const meridiem = hour >= 12 ? 'PM' : 'AM';
+        const realHour = lPad(hour);
+        const viewHour = `${meridiem} ${hour > 12 ? lPad(hour - 12) : lPad(hour === 0 ? 12 : hour)}`;
+        times.push({
+            value: realHour + min,
+            text: viewHour + min
+        });
+    }
+    return times;
+};
+
+/**
  * 날짜를 배열 형태의 년,월,일 순으로 가져오는 함수
  * @param strDate
  */
@@ -121,25 +140,31 @@ export const dateValidate = (startAt: string, endAt: string) => {
  * @param target
  * @param start
  * @param end
+ * @param isTimeExist
  */
-export const isContainsDate = (target: string, start: string, end: string) => {
-    const targetStDate = new Date(`${target} 00:00:00`);
-    const targetEdDate = new Date(`${target} 23:59:59`);
+export const isContainsDate = (target: string, start: string, end: string, isTimeExist: boolean = false) => {
+    const targetStDate = new Date(isTimeExist ? `${target}:00` : `${target} 00:00:00`);
+    const targetEdDate = new Date(isTimeExist ? `${target}:30` : `${target} 23:59:59`);
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    return (targetStDate <= startDate && startDate <= targetEdDate) ||
-        (targetStDate <= endDate && endDate <= targetEdDate);
+    if (startDate.getDate() === targetStDate.getDate()) {
+        console.log('test')
+    }
+    return !isTimeExist ? ((targetStDate <= startDate && startDate < targetEdDate) ||
+        (targetStDate <= endDate && endDate < targetEdDate)) :
+        targetStDate.getTime() === startDate.getTime()
+        ;
 };
 
 /**
  * 해당 일짜의 월요일의 날짜를 Date객체로 리턴
  * @param arrDate
  */
-export const getMondayDate = (arrDate: string[]) => {
+export const getSundayDate = (arrDate: string[]) => {
     const date = new Date(getDateFormatting(arrDate));
     const day = date.getDay();
-    const diff = date.getDate() - day + (day == 0 ? -6 : 1);
+    const diff = date.getDate() - day;
     return new Date(date.setDate(diff)).toISOString().substring(0, 10);
 };
 
@@ -153,8 +178,8 @@ export const getDateFromDiff = (targetDate: string, diff: number) => {
     return new Date(date.setDate(date.getDate() + diff)).toISOString().substring(0, 10);
 };
 
-export const getMondayToSundayLabel = (arrDate: string[]) => {
-    const mondayDate = getMondayDate(arrDate);
+export const getSundayToMondayLabel = (arrDate: string[]) => {
+    const mondayDate = getSundayDate(arrDate);
     const sundayDate = getDateFromDiff(mondayDate, 6);
     const [bYear, bMonth, bDate] = getDate(mondayDate);
     const [aYear, aMonth, aDate] = getDate(sundayDate);

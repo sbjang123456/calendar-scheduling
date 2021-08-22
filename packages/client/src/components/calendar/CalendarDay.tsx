@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const CalendarDay = (): React.ReactElement => {
 
@@ -16,4 +16,4 @@ const CalendarDay = (): React.ReactElement => {
     );
 };
 
-export default CalendarDay;
+export default memo(CalendarDay);
