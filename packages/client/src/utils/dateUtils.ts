@@ -123,11 +123,13 @@ export const dateValidate = (startAt: string, endAt: string) => {
  * @param end
  */
 export const isContainsDate = (target: string, start: string, end: string) => {
-    const targetDate = new Date(target);
+    const targetStDate = new Date(`${target} 00:00:00`);
+    const targetEdDate = new Date(`${target} 23:59:59`);
     const startDate = new Date(start);
     const endDate = new Date(end);
 
-    return startDate <= targetDate && targetDate < endDate;
+    return (targetStDate <= startDate && startDate <= targetEdDate) ||
+        (targetStDate <= endDate && endDate <= targetEdDate);
 };
 
 /**

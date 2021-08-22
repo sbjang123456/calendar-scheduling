@@ -93,7 +93,7 @@ const CalendarDate = ({
                                 </span>
                                 {(schedules ?? [])
                                     .filter((schedule) => (
-                                        isContainsDate(`${dateKey} 00:00`, schedule.startAt, schedule.endAt)
+                                        isContainsDate(dateKey, schedule.startAt, schedule.endAt)
                                     ))
                                     .sort()
                                     .map((schedule) => {

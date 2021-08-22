@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { useRecoilState } from 'recoil';
-import { arrDateState } from 'states/calendar';
 import { Button, ButtonGroup } from 'components';
 import { useRouter } from 'hooks';
 import { DateUtils } from 'utils';
@@ -8,17 +6,13 @@ import { DateUtils } from 'utils';
 const ScheduleCalendarHeader = (): React.ReactElement => {
     const { query: { sViewType, sYear, sMonth, sDate }, push } = useRouter();
 
-    const [[year, month, date], setArrDate] = useRecoilState(arrDateState);
-    // const [viewType, setViewType] = useRecoilState(viewTypeState);
-
     const handleClickCalendarChange = (kind: 'prev' | 'next' | 'today') => () => {
-        const [cYear, cMonth, cDate] = DateUtils.changeMonthYmd([year, month, date], kind, true);
-        setArrDate([cYear, cMonth, cDate]);
+        const [cYear, cMonth, cDate] = DateUtils.changeMonthYmd([sYear, sMonth, sDate], kind, true);
         push(`/schedule/calendar/${sViewType}/${cYear}/${cMonth}/${cDate}`);
     };
 
     const handleClickViewType = (vt: string) => () => {
-        push(`/schedule/calendar/${vt}/${year}/${month}/${date}`);
+        push(`/schedule/calendar/${vt}/${sYear}/${sMonth}/${sDate}`);
     };
 
     const title = useMemo(() => {

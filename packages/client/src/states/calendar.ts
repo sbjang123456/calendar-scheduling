@@ -9,22 +9,6 @@ export const scheduleDialogOpenState = atom<string>({
     default: ''
 });
 
-// /**
-//  * 현재 캘린더의 주/월 타입
-//  */
-// export const viewTypeState = atom<string>({
-//     key: 'viewTypeState',
-//     default: 'month'
-// });
-
-/**
- * router의 날짜 ([yyyy, MM, dd])
- */
-export const arrDateState = atom<string[]>({
-    key: 'arrDateState',
-    default: []
-});
-
 /**
  * 리스트를 강제로 새로고침하기 위한 객체
  */
