@@ -7,8 +7,19 @@ const ScheduleCalendarHeader = (): React.ReactElement => {
     const { query: { sViewType, sYear, sMonth, sDate }, push } = useRouter();
 
     const handleClickCalendarChange = (kind: 'prev' | 'next' | 'today') => () => {
-        const [cYear, cMonth, cDate] = DateUtils.changeMonthYmd([sYear, sMonth, sDate], kind, true);
-        push(`/schedule/calendar/${sViewType}/${cYear}/${cMonth}/${cDate}`);
+        let arrDate: string[];
+
+        if (kind === 'today') {
+            arrDate = DateUtils.changeMonthYmd([sYear, sMonth, sDate], 'today', true);
+        } else {
+            if (sViewType === 'month') {
+                arrDate = DateUtils.changeMonthYmd([sYear, sMonth, sDate], kind, true);
+            } else {
+                arrDate = DateUtils.getWeekFromTargetDate([sYear, sMonth, sDate], kind);
+            }
+        }
+
+        push(`/schedule/calendar/${sViewType}/${arrDate[0]}/${arrDate[1]}/${arrDate[2]}`);
     };
 
     const handleClickViewType = (vt: string) => () => {

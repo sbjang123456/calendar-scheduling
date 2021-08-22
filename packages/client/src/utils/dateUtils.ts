@@ -143,7 +143,12 @@ export const getMondayDate = (arrDate: string[]) => {
     return new Date(date.setDate(diff)).toISOString().substring(0, 10);
 };
 
-export const getDateFromDiff = (targetDate: any, diff: number) => {
+/**
+ * 날짜에서 일 차이 구하는 함수
+ * @param targetDate
+ * @param diff
+ */
+export const getDateFromDiff = (targetDate: string, diff: number) => {
     const date = new Date(targetDate);
     return new Date(date.setDate(date.getDate() + diff)).toISOString().substring(0, 10);
 };
@@ -154,6 +159,12 @@ export const getMondayToSundayLabel = (arrDate: string[]) => {
     const [bYear, bMonth, bDate] = getDate(mondayDate);
     const [aYear, aMonth, aDate] = getDate(sundayDate);
     return `${bYear}년 ${bMonth}월 ${bDate}일 ~ ${aYear}년 ${aMonth}월 ${aDate}일`;
+};
+
+export const getWeekFromTargetDate = (arrDate: string[], kind: 'prev' | 'next') => {
+    const diff = kind === 'prev' ? -7 : 7;
+    const diffDate = getDateFromDiff(getDateFormatting(arrDate), diff);
+    return diffDate.split('-');
 };
 
 
