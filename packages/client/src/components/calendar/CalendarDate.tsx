@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { CalendarProps } from './Calendar';
 import { classNames, ColorUtils, DateUtils } from 'utils';
 
@@ -21,13 +21,6 @@ const CalendarDate = ({
         onScheduleClick && onScheduleClick(id);
     };
 
-    const getDateFormattingByType = useCallback((arrDate: string[], type: string) => {
-        return DateUtils.getDateFormatting(
-            type === 'ne' ? DateUtils.changeMonthYmd(arrDate, 'next') :
-                type === 'be' ? DateUtils.changeMonthYmd(arrDate, 'prev') : arrDate
-        );
-    }, []);
-
     const calendarDays = useMemo(() => {
         const year = Number(sYear);
         const month = Number(Number(sMonth) - 1);
@@ -44,13 +37,18 @@ const CalendarDate = ({
             const _days = [];
             for (let j = 0; j < 7; j++) {
                 if (currentDate > endDateOfCurrentMonth) {
-                    _days.push({ type: 'ne', date: nextMonthDate });
+                    _days.push(
+                        DateUtils.getDateFormatting(DateUtils.changeMonthYmd([sYear, sMonth, DateUtils.lPad(nextMonthDate)], 'next'))
+                    );
                     nextMonthDate++;
                 } else if (firstDayOfCurrentMonth > j && i === 0) {
-                    _days.push({ type: 'be', date: beforeMonthDate });
+                    _days.push(
+                        DateUtils.getDateFormatting(DateUtils.changeMonthYmd([sYear, sMonth, DateUtils.lPad(beforeMonthDate)], 'prev'))
+                    );
                     beforeMonthDate++;
                 } else {
-                    _days.push({ type: 'cu', date: currentDate });
+                    _days.push(`${sYear}-${sMonth}-${DateUtils.lPad(currentDate)}`);
+
                     currentDate++;
                 }
             }
@@ -63,19 +61,19 @@ const CalendarDate = ({
         <>
             {calendarDays.map((week: any[], idxWeek) => (
                 <div key={idxWeek} role='row' className='Date'>
-                    {week.map((day: any, idx) => {
-                        const dateKey = getDateFormattingByType([sYear, sMonth, DateUtils.lPad(day.date)], day.type);
+                    {week.map((day: string, idx) => {
                         return (
-                            <div key={dateKey} onClick={handleClickDate(dateKey)}>
-                                <span className={classNames('dateLabel', day.type !== 'cu' && 'notCurrentMonth')}>
+                            <div key={day} onClick={handleClickDate(day)}>
+                                <span
+                                    className={classNames('dateLabel', day.split('-')[1] !== sMonth && 'notCurrentMonth')}>
                                     <span
-                                        className={classNames(dateKey === DateUtils.getDateFormatting(today) && 'today')}>
-                                        {day.date}
+                                        className={classNames(day === DateUtils.getDateFormatting(today) && 'today')}>
+                                        {new Date(day).getDate()}
                                     </span>
                                 </span>
                                 {(schedules ?? [])
                                     .filter((schedule) => (
-                                        DateUtils.isContainsDate(dateKey, schedule.startAt, schedule.endAt)
+                                        DateUtils.isContainsDate(day, schedule.startAt, schedule.endAt)
                                     ))
                                     .sort()
                                     .map((schedule) => {
@@ -85,7 +83,7 @@ const CalendarDate = ({
                                                 key={schedule.id}
                                                 onClick={handleClickSchedule(schedule.id)}
                                                 style={{
-                                                    backgroundColor: ColorUtils.getRandomRgb()
+                                                    backgroundColor: ColorUtils.getRandomRgb(),
                                                 }}
                                             >
                                                 {schedule.title}

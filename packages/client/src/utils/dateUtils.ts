@@ -144,12 +144,13 @@ export const dateValidate = (startAt: string, endAt: string) => {
  */
 export const isContainsDate = (target: string, start: string, end: string, isTimeExist: boolean = false) => {
     const targetStDate = new Date(isTimeExist ? `${target}:00` : `${target} 00:00:00`);
-    const targetEdDate = new Date(isTimeExist ? `${target}:30` : `${target} 23:59:59`);
+    // const targetEdDate = new Date(isTimeExist ? `${target}:30` : `${target} 23:59:59`);
     const startDate = new Date(start);
-    const endDate = new Date(end);
+    // const endDate = new Date(end);
 
-    return !isTimeExist ? ((targetStDate <= startDate && startDate < targetEdDate) ||
-        (targetStDate <= endDate && endDate < targetEdDate)) :
+    // return !isTimeExist ? ((targetStDate <= startDate && startDate < targetEdDate) ||
+    //     (targetStDate <= endDate && endDate < targetEdDate)) :
+    return !isTimeExist ? target === getDateFormatting(getDate(start)) :
         targetStDate.getTime() === startDate.getTime()
         ;
 };
