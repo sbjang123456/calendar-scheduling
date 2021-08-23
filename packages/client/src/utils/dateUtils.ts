@@ -155,6 +155,17 @@ export const isContainsDate = (target: string, start: string, end: string, isTim
         ;
 };
 
+export const getMinutesBySubtractTime = (start: string, end: string) => {
+    const midnightTime = new Date(start).setHours(24, 0, 0, 0);
+    const startTime = new Date(start).getTime();
+    const endTime = new Date(end).getTime();
+
+    const endDiff = endTime - startTime;
+    const midDiff = midnightTime - startTime;
+
+    return (endDiff > midDiff ? midDiff : endDiff) / 1000 / 60;
+};
+
 /**
  * 해당 일짜의 월요일의 날짜를 Date객체로 리턴
  * @param arrDate

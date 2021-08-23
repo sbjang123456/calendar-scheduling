@@ -5,7 +5,7 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   margin-top: 30px;
 
-  div[role='row'] {
+  div[role='row']:not(.Day-Week-Root) {
     width: 100%;
     border-bottom: $borderStyle;
 
@@ -20,7 +20,35 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
     justify-content: center;
 
     &.Day-Week-Root {
-      justify-content: space-between;
+      justify-content: center;
+
+      &.Day-Week-Content {
+        height: 100%;
+        min-width: 12%;
+        .Day-Week-Time {
+          width: 100%;
+          min-height: 60px;
+          border-bottom: $borderStyle;
+          &:nth-child(odd) {
+            border-bottom: none;
+          }
+          .Day-Week-Time-Label {
+            margin-top: 5px;
+          }
+          .calendar-schedule {
+            height: calc(100% - 10px);
+            border-radius: 4px;
+            overFlow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #fff;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin: 3px 10px;
+            padding-top: 5px;
+          }
+        }
+      }
     }
 
     & > div {
@@ -35,18 +63,21 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       border-right: $borderStyle;
 
-      &:first-child, &.Day-Week:nth-child(2) {
+      &:first-child:not(.Day-Week-Content), &.Day-Week:nth-child(2):not(.Day-Week-Content) {
         color: rgba(255, 0, 0, 0.7);
       }
 
       &:last-child {
-        color: rgba(0, 0, 255, 0.7);
         border-right: none;
+        &:not(.Day-Week-Content) {
+          color: rgba(0, 0, 255, 0.7);
+        }
       }
 
       &.Day-Week {
         min-width: 12%;
         flex-direction: column;
+        border-bottom: $borderStyle;
 
         .Day-Week-Date {
           font-size: 0.85rem;
@@ -85,6 +116,11 @@ $borderStyle: 1px solid rgba(0, 0, 0, 0.2);
       &.Date-Week {
         width: 12%;
         min-height: 60px;
+      }
+      &.Date-Week-Time {
+        //width: 12%;
+        min-height: 60px;
+        flex-direction: column;
       }
 
       & .calendar-schedule {

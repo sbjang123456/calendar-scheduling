@@ -12,8 +12,10 @@ const CalendarWeek = ({
                           onScheduleClick
                       }: CalendarProps): React.ReactElement => {
 
-    const handleClickDate = (dateFormatting: string) => () => {
-        onDateClick && onDateClick(dateFormatting, true);
+    const handleClickDate = (dateFormatting: string, notIdx: number) => () => {
+        if (onDateClick && notIdx !== 0) {
+            onDateClick(dateFormatting, true);
+        }
     };
 
     const handleClickSchedule = (id: number) => (evt: React.MouseEvent<HTMLDivElement>) => {
@@ -36,10 +38,10 @@ const CalendarWeek = ({
         const sunday = DateUtils.getSundayDate([sYear, sMonth, sDate]);
         const times = DateUtils.getDayHours();
         const calendarDays = [];
-        for (const time of times) {
+        calendarDays.push(times);
+        for (let i = 0; i < 7; i++) {
             const _week = [];
-            _week.push(time);
-            for (let i = 0; i < 7; i++) {
+            for (const time of times) {
                 _week.push({
                     ...time,
                     date: DateUtils.getDateFromDiff(sunday, i)
@@ -68,23 +70,21 @@ const CalendarWeek = ({
                     ))
                 }
             </div>
-            {calendarDays.map((weekDays: any[], idxWeek) => (
-                <div key={idxWeek} role='row' className='Date Date-Week-Root'>
-                    {weekDays.map((day: any, idx) => {
-                        const dateKey = `${day.date} ${day.value}`;
-                        return (
-                            <div key={idx} className='Date-Week' onClick={handleClickDate(dateKey)}>
-                                {idx === 0 ? (
-                                    <span className={classNames('dateLabel')}>
-                                        <span>
-                                            {idxWeek % 2 === 0 && day.text}
-                                        </span>
-                                    </span>
+            <div role='row' className='Day Day-Week-Root Day-Week-Content'>
+                {calendarDays.map((weekDays: any[], idxDate) => (
+                    <div className='Day-Week Day-Week-Content'>
+                        {weekDays.map((day: any, idx) => (
+                            <div key={idx} className='Day-Week-Time'
+                                 onClick={handleClickDate(`${day.date} ${day.value}`, idxDate)}>
+                                {idxDate === 0 ? (
+                                    <div className='Day-Week-Time-Label'>
+                                        {idx % 2 === 0 && day.text}
+                                    </div>
                                 ) : (
                                     <>
                                         {(schedules ?? [])
                                             .filter((schedule) => (
-                                                DateUtils.isContainsDate(dateKey, schedule.startAt, schedule.endAt, true)
+                                                DateUtils.isContainsDate(`${day.date} ${day.value}`, schedule.startAt, schedule.endAt, true)
                                             ))
                                             .sort()
                                             .map((schedule) => {
@@ -94,7 +94,8 @@ const CalendarWeek = ({
                                                         key={schedule.id}
                                                         onClick={handleClickSchedule(schedule.id)}
                                                         style={{
-                                                            backgroundColor: ColorUtils.getRandomRgb()
+                                                            backgroundColor: ColorUtils.getRandomRgb(),
+                                                            height: `calc(${DateUtils.getMinutesBySubtractTime(schedule.startAt, schedule.endAt) / 30 * 100}% - 10px)`
                                                         }}
                                                     >
                                                         {schedule.title}
@@ -104,10 +105,10 @@ const CalendarWeek = ({
                                     </>
                                 )}
                             </div>
-                        );
-                    })}
-                </div>
-            ))}
+                        ))}
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
